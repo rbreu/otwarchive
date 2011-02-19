@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
 
   helper :all # include all helpers, all the time
 
+  include Tr8n::CommonMethods
+  
   include HtmlCleaner
   before_filter :sanitize_params
 

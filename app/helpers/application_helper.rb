@@ -2,6 +2,9 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   
+  include Tr8n::HelperMethods
+  include Wf::HelperMethods
+
   include HtmlCleaner
 
 	# Generates class names for the main div in the application layout
