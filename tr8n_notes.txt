@@ -1,1 +1,15 @@
-Hack for testing: Removed "description" from FIELDS_ALLOWING_HTML in local.yml, because some of the tr8n tables have description fields too and it's messing with our monkey patching.
+To get tr8n running:
+
+1.) (Hack, need better solution) Remove "description" from FIELDS_ALLOWING_HTML in local.yml, because some of the tr8n tables have description fields too and it's messing with our monkey patching.
+
+2.) Run:
+
+$ rake tr8n:sync
+$ rake db:migrate
+$ rake tr8n:init
+
+3.) Run:
+
+$ ./hacky_tr8n_config_paster.rb 
+
+(Hack to work around the reloading plugin from overwriting our config.)
