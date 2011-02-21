@@ -32,7 +32,7 @@ defaults: &defaults
   enable_language_cases:      true      # enables support for language cases
   enable_client_sdk:          false     # allows javascript to use tr8nProxy object
   
-  enable_country_tracking:    true      # tracks and reports translator countries 
+  enable_country_tracking:    false      # tracks and reports translator countries 
 
   #############################################################################
   # Featured languages can be added as a bottom strip bar on all pages using
@@ -108,7 +108,7 @@ defaults: &defaults
     skip_before_filters:      []                              # filters from application controller
     after_filters:            []                              # filters from application controller
     user_info:
-      enabled:                false                           # if disabled, will fallback onto translators
+      enabled:                true                            # if disabled, will fallback onto translators
       class_name:             User                            # class name for the User object type
       current_user_method:    current_user                    # returns current user object
       methods:                                                # User object methods mapping

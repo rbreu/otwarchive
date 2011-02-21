@@ -1,19 +1,18 @@
 Rails.configuration.after_initialize do 
  
   class Tr8n::Config
-    
+
     def self.user_name(user)
-      current_user.default_pseud.id.to_s
+      user.default_pseud.id.to_s
     end
  
-    def self.user_admin(user)
-      current_user.translation_admin?
+    def self.user_id(user)
+      user.id
     end
-
-    def self.user_guest(user)
-      !logged_in?
+ 
+    def self.current_user_is_translator?
+      true
     end
-
       
   end
  
