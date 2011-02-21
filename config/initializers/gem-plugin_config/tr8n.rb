@@ -25,6 +25,10 @@ Rails.configuration.after_initialize do
       !guest_user?
     end
       
+    def self.current_user_is_admin?
+      !guest_user?
+    end
+      
     # END EVIL HACK COMMENT DON'T REMOVE
 
   end
