@@ -10,8 +10,16 @@ Rails.configuration.after_initialize do
       user.id
     end
  
+    def self.guest_user?(user=current_user)
+      user.nil?
+    end
+
+    def self.current_user_is_guest?
+      guest_user?
+    end
+
     def self.current_user_is_translator?
-      true
+      !guest_user?
     end
       
   end
