@@ -24,9 +24,10 @@ puts conf
 puts "Opening file #{dst}"
 
 new = File.read(dst)
-new.gsub!(/(    # BEGIN EVIL HACK COMMENT DON'T REMOVE.*?# END EVIL HACK COMMENT DON'T REMOVE\s*end)/m, "")
+new.gsub!(/\s*end\s*\z/m, "")
+new.gsub!(/\s*# BEGIN EVIL HACK COMMENT DON'T REMOVE.*?# END EVIL HACK COMMENT DON'T REMOVE\s*/m, "")
 
-new = "#{new}\n#{conf}\nend"
+new = "#{new}\n\n#{conf}\nend"
 
 f = File.open(dst, "w")
 f.write(new)

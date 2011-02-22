@@ -6,7 +6,7 @@ Rails.configuration.after_initialize do
     # (it's only the comment that's evil, the rest is fine ;-)
     
     def self.user_name(user)
-      user.default_pseud.id.to_s
+      user.default_pseud.name
     end
  
     def self.user_id(user)
@@ -29,7 +29,11 @@ Rails.configuration.after_initialize do
       !guest_user?
     end
       
-    # END EVIL HACK COMMENT DON'T REMOVE
+    def self.user_mugshot(user)
+      user.default_pseud.icon.url()
+    end
+
+  # END EVIL HACK COMMENT DON'T REMOVE
 
   end
  
