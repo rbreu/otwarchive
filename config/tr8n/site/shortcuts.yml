@@ -34,10 +34,6 @@ Alt+Shift+A:
   description:  Opens awards
   script:       "window.location = '/tr8n/awards';"
   
-Alt+Shift+B: 
-  description:  Opens message board
-  script:       "window.location = '/tr8n/forum';"
-  
 Alt+Shift+H: 
   description:  Opens help
   script:       "window.location = '/tr8n/help';"

@@ -303,10 +303,6 @@ class Tr8n::Language < ActiveRecord::Base
     Tr8n::Cache.delete("enabled_languages")
   end
 
-  def recently_added_forum_messages
-    @recently_added_forum_messages ||= Tr8n::LanguageForumMessage.find(:all, :conditions => ["language_id = ?", self.id], :order => "created_at desc", :limit => 5)    
-  end
-
   def recently_added_translations
     @recently_added_translations ||= Tr8n::Translation.find(:all, :conditions => ["language_id = ?", self.id], :order => "created_at desc", :limit => 5)    
   end

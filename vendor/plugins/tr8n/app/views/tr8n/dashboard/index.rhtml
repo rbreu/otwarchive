@@ -52,12 +52,6 @@
 											</td>
 	                  </tr>
 	                  <tr>
-	                    <td><%=tra("Your Forum Messages:", "Dashboard section header") %></td>
-	                    <td>
-	                       <%=tr8n_current_translator.language_forum_messages.count %> 
-	                    </td>
-	                  </tr>
-	                  <tr>
 	                    <td style="vertical-align:top;"><%=tra("Your Languages:", "Dashboard section header") %></td>
 	                    <td style="vertical-align:top;">
 			                  <% langs = [] %>
@@ -93,7 +87,6 @@
 	      | <%=link_to(tra("phrases", "Language action link"), "/tr8n/phrases?locale=#{lang.locale}")%>
 	      | <%=link_to(tra("translations", "Language action link"), "/tr8n/translations?locale=#{lang.locale}")%>
 	      | <%=link_to(tra("awards", "Language action link"), "/tr8n/awards?locale=#{lang.locale}")%>
-	      | <%=link_to(tra("discussions", "Language action link"), "/tr8n/forum?locale=#{lang.locale}")%>
 	      <% if tr8n_current_translator.manager? %>
 	         | <%=link_to(tra("manage", "Language action link"), "/tr8n/language/index?locale=#{lang.locale}")%>
 	      <% end %>
@@ -113,8 +106,6 @@
 		<div id="lang_content_<%=lang.id%>" class="section_box colored">
 	    <%=render :partial=>"statistics", :locals => {:lang => lang, :translator_metric => translator_metric}%>
 			
-	    <%=render :partial=>"forum", :locals => {:lang => lang}%>
-	
 	    <%=render :partial=>"translations", :locals => {:lang => lang}%>
 	
 	    <%=render :partial=>"votes", :locals => {:lang => lang}%>

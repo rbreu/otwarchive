@@ -48,7 +48,6 @@ private
         {"title" => "Translation Keys", "description" => "Admin tab", "controller" => "translation_key"},
         {"title" => "Translations", "description" => "Admin tab", "controller" => "translation"},
         {"title" => "Translators", "description" => "Admin tab", "controller" => "translator"},
-        {"title" => "Forum", "description" => "Admin tab", "controller" => "forum"},
         {"title" => "Client SDK", "description" => "Admin tab", "controller" => "clientsdk"}
     ]
   end

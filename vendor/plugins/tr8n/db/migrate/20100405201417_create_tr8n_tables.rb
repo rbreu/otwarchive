@@ -194,45 +194,6 @@ class CreateTr8nTables < ActiveRecord::Migration
     add_index :tr8n_translation_votes, [:translator_id], :name => "tr8n_trans_votes_translator_id"
     add_index :tr8n_translation_votes, [:translation_id, :translator_id], :name => "tr8n_trans_votes_trans_id_translator_id"
 
-    create_table :tr8n_glossary do |t|
-      t.string  :keyword
-      t.text    :description
-      t.timestamps
-    end
-    add_index :tr8n_glossary, [:keyword]
-    
-    create_table :tr8n_language_forum_topics do |t|
-      t.integer :translator_id, :null => false
-      t.integer :language_id
-      t.text    :topic, :null => false
-      t.timestamps
-    end
-    add_index :tr8n_language_forum_topics, [:language_id], :name => "tr8n_forum_topics_lang_id"
-    add_index :tr8n_language_forum_topics, [:translator_id], :name => "tr8n_forum_topics_translator_id"
-    
-    create_table :tr8n_language_forum_messages do |t|
-      t.integer :language_id, :null => false
-      t.integer :language_forum_topic_id, :null => false
-      t.integer :translator_id, :null => false
-      t.text    :message, :null => false
-      t.timestamps
-    end
-    add_index :tr8n_language_forum_messages, [:language_id], :name => "tr8n_forum_msgs_lang_id"
-    add_index :tr8n_language_forum_messages, [:translator_id], :name => "tr8n_forums_msgs_translator_id"
-    add_index :tr8n_language_forum_messages, [:language_id, :language_forum_topic_id], :name => "tr8n_forum_msgs_lang_id_topic_id"
-    
-    create_table :tr8n_language_forum_abuse_reports do |t|
-      t.integer :language_id, :null => false
-      t.integer :translator_id, :null => false
-      t.integer :language_forum_message_id, :null => false
-      t.string  :reason
-      t.timestamps
-    end
-    add_index :tr8n_language_forum_abuse_reports, [:language_id], :name => "tr8n_forum_reports_lang_id"
-    add_index :tr8n_language_forum_abuse_reports, [:language_id, :translator_id], :name => "tr8n_forum_reports_lang_id_translator_id"
-    add_index :tr8n_language_forum_abuse_reports, [:language_forum_message_id], :name => "tr8n_forum_reports_message_id"
-  end
-
   def self.down
     drop_table :tr8n_languages
     drop_table :tr8n_language_rules
@@ -249,9 +210,5 @@ class CreateTr8nTables < ActiveRecord::Migration
     drop_table :tr8n_translation_key_locks
     drop_table :tr8n_translations
     drop_table :tr8n_translation_votes
-    drop_table :tr8n_glossary
-    drop_table :tr8n_language_forum_messages
-    drop_table :tr8n_language_forum_topics
-    drop_table :tr8n_language_forum_abuse_reports
   end
 end
