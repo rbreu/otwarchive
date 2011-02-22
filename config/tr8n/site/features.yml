@@ -8,7 +8,7 @@
 #############################################################################
 
 defaults: &defaults
-  enabled_features: [dashboard, sitemap, phrases, translations, awards, forum, glossary, help]
+  enabled_features: [dashboard, phrases, translations, awards, forum]
   
   dashboard:
     title:            Dashboard
@@ -23,14 +23,6 @@ defaults: &defaults
     link:             /tr8n/phrases
     controller:       phrases
     actions:          [index, view]
-    default_language: false
-    manager_only:     false
-  
-  sitemap:
-    title:            Site Map
-    link:             /tr8n/phrases/map
-    controller:       phrases
-    actions:          [map, index, view]
     default_language: false
     manager_only:     false
   
@@ -58,14 +50,6 @@ defaults: &defaults
     default_language: true
     manager_only:     false
   
-  glossary:
-    title:            Glossary
-    link:             /tr8n/glossary
-    controller:       glossary
-    actions:          [index]
-    default_language: true
-    manager_only:     false
-  
   rules:
     title:            Manage Language
     link:             /tr8n/language
@@ -74,14 +58,6 @@ defaults: &defaults
     default_language: true
     manager_only:     true
   
-  help:
-    title:            Help
-    link:             /tr8n/help
-    controller:       help
-    actions:          []
-    default_language: true
-    manager_only:     false
-
   test:
     title:            Test
     link:             http://www.google.com

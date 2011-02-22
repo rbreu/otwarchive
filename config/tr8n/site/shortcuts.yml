@@ -18,17 +18,9 @@ Ctrl+Shift+K:
   description:  Adds software keyboard for each entry field
   script:       "Tr8n.Utils.toggleKeyboards();"
 
-Ctrl+Shift+C:       
-  description:  Displays Tr8n credits
-  script:       "window.location = '/tr8n/home/credits';"
-
 Alt+Shift+D: 
   description:  Opens dashboard
   script:       "window.location = '/tr8n/dashboard';"
-
-Alt+Shift+M: 
-  description:  Opens sitemap 
-  script:       "window.location = '/tr8n/phrases/map';"
 
 Alt+Shift+P: 
   description:  Opens phrases
@@ -45,10 +37,6 @@ Alt+Shift+A:
 Alt+Shift+B: 
   description:  Opens message board
   script:       "window.location = '/tr8n/forum';"
-  
-Alt+Shift+G: 
-  description:  Opens glossary
-  script:       "window.location = '/tr8n/glossary';"
   
 Alt+Shift+H: 
   description:  Opens help
