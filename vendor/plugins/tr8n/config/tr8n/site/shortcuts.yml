@@ -50,6 +50,3 @@ Alt+Shift+G:
   description:  Opens glossary
   script:       "window.location = '/tr8n/glossary';"
   
-Alt+Shift+H: 
-  description:  Opens help
-  script:       "window.location = '/tr8n/help';"

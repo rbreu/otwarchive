@@ -3,9 +3,6 @@
 
   <% form_for(:language, tr8n_current_language, :url => {:action => :index}, :html => {:id => 'grammar_form', :method => :post}) do |f| %>
     <div id="grammar_content" class="section_box colored">
-      <div style="float:right; padding-right:5px;">
-        <%=tr8n_help_icon_tag %>
-      </div>
 			
 			<div style="padding-top:5px;padding-bottom:10px;font-size:12px;">
           <%=tra("Tokens are parts of a phrase that are not translated, such as a profile name or a number.", "Tr8n language management") %> 

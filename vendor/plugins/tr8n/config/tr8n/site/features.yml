@@ -8,7 +8,7 @@
 #############################################################################
 
 defaults: &defaults
-  enabled_features: [dashboard, sitemap, phrases, translations, awards, forum, glossary, help]
+  enabled_features: [dashboard, sitemap, phrases, translations, awards, forum, glossary]
   
   dashboard:
     title:            Dashboard
@@ -74,14 +74,6 @@ defaults: &defaults
     default_language: true
     manager_only:     true
   
-  help:
-    title:            Help
-    link:             /tr8n/help
-    controller:       help
-    actions:          []
-    default_language: true
-    manager_only:     false
-
   test:
     title:            Test
     link:             http://www.google.com

@@ -3,9 +3,6 @@
   
   <% form_for(:translator, tr8n_current_translator, :url => {:action => :index}, :html => {:id => 'basic_info_form', :method => :post}) do |f| %>
     <div class="section_box colored">
-      <div style="float:right; padding-right:5px;">
-          <%=tr8n_help_icon_tag %>
-      </div>
       <div ondblclick="switchSectionMode('basic_info', 'edit')">
         <table>
           <tr>

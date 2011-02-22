@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  [:awards, :chart, :dashboard, :forum, :glossary, :help, :language_cases, 
+  [:awards, :chart, :dashboard, :forum, :glossary, :language_cases, 
    :language, :phrases, :translations, :translator, :home, :login].each do |ctrl|   
     map.connect "tr8n/#{ctrl}/:action", :controller => "tr8n/#{ctrl}"
   end
