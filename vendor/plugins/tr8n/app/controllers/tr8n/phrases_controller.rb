@@ -25,7 +25,6 @@ class Tr8n::PhrasesController < Tr8n::BaseController
 
   before_filter :validate_current_translator
   before_filter :validate_default_language, :except => [:translate, :vote]
-  before_filter :init_sitemap_section, :except => [:translate, :vote]
   
   def index
     conditions = Tr8n::TranslationKey.search_conditions_for(params)
@@ -222,10 +221,6 @@ class Tr8n::PhrasesController < Tr8n::BaseController
     redirect_to(:action => :view, :translation_key_id => @translation_key.id)
   end
 
-  def map
-    @section_key = "map"
-  end
-    
   def dictionary
     @translation_key = Tr8n::TranslationKey.find(params[:translation_key_id])
     @definitions = Tr8n::Dictionary.load_definitions_for(@translation_key.words)

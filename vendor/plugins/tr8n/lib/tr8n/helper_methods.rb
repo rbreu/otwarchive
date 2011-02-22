@@ -166,19 +166,6 @@ module Tr8n::HelperMethods
     html.html_safe
   end  
   
-  def tr8n_sitemap(sections, splitters, options = {})
-    html = ""
-    html << "<table style='width:100%'>"
-    html << "<tr>"
-    splitters.each do |splitter| 
-      html << "<td style='vertical-align:top; width:" << (100 / splitters.size).to_s << "%;'>"
-      html << generate_sitemap(sections[splitter.first..splitter.last], options)      
-      html << "</td>"
-    end 
-    html << "</tr>"
-    html << "</table>"
-    html.html_safe
-  end
   
   def tr8n_breadcrumb_tag(source = nil, opts = {})
     source ||= "#{controller.class.name.underscore.gsub("_controller", "")}/#{controller.action_name}" 

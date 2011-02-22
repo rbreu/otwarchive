@@ -8,7 +8,7 @@
 #############################################################################
 
 defaults: &defaults
-  enabled_features: [dashboard, sitemap, phrases, translations, awards, forum, glossary]
+  enabled_features: [dashboard, phrases, translations, awards, forum, glossary]
   
   dashboard:
     title:            Dashboard
@@ -23,14 +23,6 @@ defaults: &defaults
     link:             /tr8n/phrases
     controller:       phrases
     actions:          [index, view]
-    default_language: false
-    manager_only:     false
-  
-  sitemap:
-    title:            Site Map
-    link:             /tr8n/phrases/map
-    controller:       phrases
-    actions:          [map, index, view]
     default_language: false
     manager_only:     false
   

@@ -22,10 +22,6 @@ Alt+Shift+D:
   description:  Opens dashboard
   script:       "window.location = '/tr8n/dashboard';"
 
-Alt+Shift+M: 
-  description:  Opens sitemap 
-  script:       "window.location = '/tr8n/phrases/map';"
-
 Alt+Shift+P: 
   description:  Opens phrases
   script:       "window.location = '/tr8n/phrases';"
