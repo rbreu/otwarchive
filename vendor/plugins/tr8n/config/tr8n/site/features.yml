@@ -8,7 +8,7 @@
 #############################################################################
 
 defaults: &defaults
-  enabled_features: [dashboard, phrases, translations, awards, forum, glossary]
+  enabled_features: [dashboard, phrases, translations, awards, forum]
   
   dashboard:
     title:            Dashboard
@@ -47,14 +47,6 @@ defaults: &defaults
     link:             /tr8n/forum
     controller:       forum
     actions:          [index, topic, message]
-    default_language: true
-    manager_only:     false
-  
-  glossary:
-    title:            Glossary
-    link:             /tr8n/glossary
-    controller:       glossary
-    actions:          [index]
     default_language: true
     manager_only:     false
   

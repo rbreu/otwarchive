@@ -98,26 +98,6 @@
 		        </div>   
 		        <% end %> 
 		        
-		        <% if Tr8n::Config.enable_glossary_hints? and @translation_key.glossary? %>  
-		          <div class="small_section_title" style="color: #999; font-size: 10px; padding-top:10px;">
-		             <strong><%=trla("Glossary")%></strong>
-		          </div>
-		          
-		          <div id="tr8n_glossary_<%=@translation_key.id%>" class="small_section">
-		            <div class="glossary_table" style="max-height:150px;overflow:auto;border:solid 1px #ccc;">
-		              <table>
-		                <% @translation_key.glossary.each do |term| %>
-		                  <% border_style = "border-bottom: 1px dotted #ccc;" unless @translation_key.glossary.last == term %>
-		                  <tr style="<%=border_style%>">
-		                    <td><strong><%=term.keyword %></strong></td>
-		                    <td><%=term.description %></td>
-		                  </tr>
-		                <% end %>
-		              </table>
-		            </div>
-		          </div>
-		        <% end %>						
-						
         </div>
 				
     </div> 

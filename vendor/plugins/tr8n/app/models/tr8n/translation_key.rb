@@ -172,14 +172,6 @@ class Tr8n::TranslationKey < ActiveRecord::Base
     language_rules_dependant_tokens(language).any?
   end
 
-  def glossary
-    @glossary ||= Tr8n::Glossary.find(:all, :conditions => ["keyword in (?)", words], :order => "keyword asc")
-  end
-  
-  def glossary?
-    not glossary.empty?
-  end
-  
   def lock_for(language)
     Tr8n::TranslationKeyLock.for(self, language)
   end

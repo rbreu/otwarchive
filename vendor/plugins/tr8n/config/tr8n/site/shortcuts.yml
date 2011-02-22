@@ -38,7 +38,3 @@ Alt+Shift+B:
   description:  Opens message board
   script:       "window.location = '/tr8n/forum';"
   
-Alt+Shift+G: 
-  description:  Opens glossary
-  script:       "window.location = '/tr8n/glossary';"
-  

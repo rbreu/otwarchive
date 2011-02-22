@@ -1,10 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
-  [:awards, :chart, :dashboard, :forum, :glossary, :language_cases, 
+  [:awards, :chart, :dashboard, :forum, :language_cases, 
    :language, :phrases, :translations, :translator, :login].each do |ctrl|   
     map.connect "tr8n/#{ctrl}/:action", :controller => "tr8n/#{ctrl}"
   end
 
-  [:chart, :clientsdk, :forum, :glossary, :language, :translation, :translation_key, :translator, :domain].each do |ctrl|   
+  [:chart, :clientsdk, :forum, :language, :translation, :translation_key, :translator, :domain].each do |ctrl|   
     map.connect "tr8n/admin/#{ctrl}/:action", :controller => "tr8n/admin/#{ctrl}"
   end
   

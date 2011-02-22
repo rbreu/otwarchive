@@ -83,7 +83,7 @@ class Tr8n::Config
        Tr8n::Translator, Tr8n::TranslatorLog, Tr8n::TranslatorMetric, 
        Tr8n::TranslatorFollowing, Tr8n::TranslatorReport, 
        Tr8n::LanguageForumTopic, Tr8n::LanguageForumMessage, Tr8n::LanguageForumAbuseReport,
-       Tr8n::Glossary, Tr8n::IpLocation
+       Tr8n::IpLocation
     ]    
   end
 
@@ -108,12 +108,6 @@ class Tr8n::Config
     end
     puts "Created #{default_languages.size} languages."
     
-    puts "Initializing default glossary..."
-    default_glossary.each do |keyword, description|
-      Tr8n::Glossary.create(:keyword => keyword, :description => description)
-    end
-    
-    puts "Done."
   end
   
   def self.root
@@ -156,10 +150,6 @@ class Tr8n::Config
 
   def self.default_data_tokens
     @default_data_tokens ||= load_yml("/config/tr8n/tokens/data.yml", nil)
-  end
-
-  def self.default_glossary
-    @default_glossary ||= load_yml("/config/tr8n/site/default_glossary.yml", nil)
   end
 
   def self.features
@@ -212,10 +202,6 @@ class Tr8n::Config
 
   def self.enable_google_suggestions?
     config[:enable_google_suggestions]
-  end
-
-  def self.enable_glossary_hints?
-    config[:enable_glossary_hints]
   end
 
   def self.enable_dictionary_lookup?
