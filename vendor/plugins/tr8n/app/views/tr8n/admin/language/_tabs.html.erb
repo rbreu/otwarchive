@@ -7,15 +7,8 @@
     ["Cases", {:action => :cases}],
     ["Case Rules", {:action => :case_rules}],
     ["Case Exceptions", {:action => :case_values}],
-    ["Metrics", {:action => :metrics}],
-    ["Charts", {:action => :charts}]].each do |link|
-      if controller.action_name == link.last[:action].to_s
-        current_tab = link.first if current_tab.blank?
-        links << link.first
-      else
-        links << link_to(link.first, link.last)
-      end 
-   end   
+    ["Metrics", {:action => :metrics}]
+  ]
 %>
 
 <div class="section_title">

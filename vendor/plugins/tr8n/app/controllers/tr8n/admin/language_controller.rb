@@ -53,10 +53,6 @@ class Tr8n::Admin::LanguageController < Tr8n::Admin::BaseController
     redirect_to_source
   end
     
-  def charts
-    
-  end
-
   def metrics
     @metrics = Tr8n::LanguageMetric.filter(:params => params, :filter => Tr8n::LanguageMetricFilter)
   end
