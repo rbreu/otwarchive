@@ -236,9 +236,6 @@ class Tr8n::Config
     config[:enable_admin_inline_mode]
   end
 
-  def self.enable_country_tracking?
-    config[:enable_country_tracking]
-  end
   
   #########################################################
   # Config Sections

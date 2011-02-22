@@ -31,7 +31,6 @@ defaults: &defaults
   enable_language_cases:      true      # enables support for language cases
   enable_client_sdk:          false     # allows javascript to use tr8nProxy object
   
-  enable_country_tracking:    false      # tracks and reports translator countries 
 
   #############################################################################
   # Featured languages can be added as a bottom strip bar on all pages using
@@ -97,7 +96,6 @@ defaults: &defaults
     current_locale_method:    current_locale                  # application controller method that sets and returns current locale
     default_url:              /home                      # default site url where to redirect the user if Tr8n is disabled            
     default_locale:           en-US                           # locale of the site default language
-    sitemap_path:             /config/tr8n/site/sitemap.json  # location of the sitemap definition file
     splash_screen:            /tr8n/common/splash_screen      # location of the Tr8n splash screen  
     tr8n_layout:              tr8n                            # layout for the tr8n pages
     tr8n_helpers:             []                              # if you need to add extra helpers

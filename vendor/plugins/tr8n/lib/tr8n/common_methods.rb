@@ -91,11 +91,6 @@ module Tr8n::CommonMethods
     
     # initialize request thread variables
     Tr8n::Config.init(tr8n_current_locale, tr8n_current_user)
-  
-    # track user's last ip address  
-    if Tr8n::Config.enable_country_tracking? and Tr8n::Config.current_user_is_translator?
-      Tr8n::Config.current_translator.update_last_ip(tr8n_request_remote_ip)
-    end
   end
 
   # translation functions
