@@ -86,7 +86,6 @@
 	      | <%=link_to(tra("site map", "Language action link"), "/tr8n/phrases/map?locale=#{lang.locale}")%>
 	      | <%=link_to(tra("phrases", "Language action link"), "/tr8n/phrases?locale=#{lang.locale}")%>
 	      | <%=link_to(tra("translations", "Language action link"), "/tr8n/translations?locale=#{lang.locale}")%>
-	      | <%=link_to(tra("awards", "Language action link"), "/tr8n/awards?locale=#{lang.locale}")%>
 	      <% if tr8n_current_translator.manager? %>
 	         | <%=link_to(tra("manage", "Language action link"), "/tr8n/language/index?locale=#{lang.locale}")%>
 	      <% end %>

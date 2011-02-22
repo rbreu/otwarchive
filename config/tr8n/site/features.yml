@@ -8,7 +8,7 @@
 #############################################################################
 
 defaults: &defaults
-  enabled_features: [dashboard, phrases, translations, awards]
+  enabled_features: [dashboard, phrases, translations]
   
   dashboard:
     title:            Dashboard
@@ -33,15 +33,7 @@ defaults: &defaults
     actions:          [index, view]
     default_language: false
     manager_only:     false
-    
-  awards:
-    title:            Awards
-    link:             /tr8n/awards
-    controller:       awards
-    actions:          [index]
-    default_language: true
-    manager_only:     false
-  
+      
   rules:
     title:            Manage Language
     link:             /tr8n/language

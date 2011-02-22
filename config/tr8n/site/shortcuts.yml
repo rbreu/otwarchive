@@ -30,10 +30,3 @@ Alt+Shift+T:
   description:  Opens translations
   script:       "window.location = '/tr8n/translations';"
   
-Alt+Shift+A: 
-  description:  Opens awards
-  script:       "window.location = '/tr8n/awards';"
-  
-Alt+Shift+H: 
-  description:  Opens help
-  script:       "window.location = '/tr8n/help';"
