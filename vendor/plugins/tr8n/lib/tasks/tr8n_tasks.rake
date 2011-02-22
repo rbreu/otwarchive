@@ -47,8 +47,6 @@ namespace :tr8n do
       lang = Tr8n::Language.for(locale)
       next unless lang
       
-      lang.google_key = info[:google_key] 
-      lang.facebook_key = info[:facebook_key] 
       lang.save      
     end
   end
@@ -93,8 +91,6 @@ namespace :tr8n do
         f.puts("\"#{l.locale}\":\n")
         f.puts("\tenglish_name: \"#{l.english_name}\"\n")
         f.puts("\tnative_name: \"#{l.native_name}\"\n")
-        f.puts("\tgoogle_key: \"#{l.google_key}\"\n")
-        f.puts("\tfacebook_key: \"#{l.facebook_key}\"\n")
       end
     end
   end
