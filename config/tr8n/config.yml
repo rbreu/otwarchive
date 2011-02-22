@@ -54,7 +54,7 @@ defaults: &defaults
   # translation. If the flag is set to false, then a user must be promoted to
   # be a translator in order to submit or vote on translations.
   #############################################################################
-  open_registration_mode:     false
+  open_registration_mode:     true
 
   #############################################################################
   # Tr8n best run with caching enabled 
