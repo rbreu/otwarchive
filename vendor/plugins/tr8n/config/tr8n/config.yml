@@ -15,7 +15,6 @@ defaults: &defaults
   enable_key_caller_tracking: false     # tracks all calls to labels with their traces - for debugging only
   
   enable_software_keyboard:   true      # shows the soft keyboard icon  
-  enable_google_suggestions:  true      # uses google for suggestions
   enable_keyboard_shortcuts:  true      # adds some keyboard shortcuts like ctrl+shift+s
   enable_dictionary_lookup:   true      # shows dictionary words definitions
   

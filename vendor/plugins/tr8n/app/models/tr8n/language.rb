@@ -122,10 +122,6 @@ class Tr8n::Language < ActiveRecord::Base
     end
   end
   
-  def suggestible?
-    not google_key.blank?
-  end
-  
   def case_for(case_keyword)
     case_keyword_maps[case_keyword]
   end

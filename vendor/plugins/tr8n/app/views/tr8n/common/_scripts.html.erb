@@ -20,13 +20,6 @@
 	  </script>
   <% end %>
 
-  <% if Tr8n::Config.enable_google_suggestions? and Tr8n::Config.current_user_is_translator? %>  
-    <script type="text/javascript" src="<%=request.ssl? ? 'https' : 'http' %>://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-       initializeTr8nGoogleSuggestions();
-    </script>
-  <% end %>
-
   <% if Tr8n::Config.enable_software_keyboard? %>
 	  <script> 
 		  VKI_default_layout = "<%=Tr8n::KeyboardMapping.current_1_36%>";

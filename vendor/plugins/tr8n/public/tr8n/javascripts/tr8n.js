@@ -288,21 +288,6 @@ Tr8n.Translator.prototype = {
     });
   },
 
-  suggestTranslation: function(translation_key_id, original, tokens, from_lang, to_lang) {
-    google.language.translate(original, from_lang, to_lang, function(result) {
-      if (!result.error) {
-        var suggestion = result.translation;
-        tokens = tokens.split(",");
-        for (var i=0; i<tokens.length; i++) {
-          suggestion = Tr8n.Utils.replaceAll(suggestion, "(" + i + ")", tokens[i]);
-        }
-        Tr8n.element("tr8n_translation_suggestion_" + translation_key_id).innerHTML = suggestion;
-        Tr8n.element("tr8n_google_suggestion_container_" + translation_key_id).style.display = "block";
-        var suggestion_section = Tr8n.element('tr8n_google_suggestion_section');
-        if (suggestion_section) suggestion_section.style.display = "block";
-      }
-    });
-  }
 
 }
 
@@ -887,6 +872,3 @@ function initializeTr8n() {
   Tr8n.Utils.addEvent(window, 'load', setup);
 }
 
-function initializeTr8nGoogleSuggestions() {
-   google.load("language", "1");
-}
