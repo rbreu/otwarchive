@@ -194,12 +194,6 @@
 
 
 
-/* Home */
-
-.home_banner {background:url('/images/bubbles_bkgd.jpg');-webkit-border-radius:5px 5px 0 0;-moz-border-radius:5px 5px 0 0;border-radius:5px 5px 0 0;padding:50px 25px 0px 25px;height:220px;border-bottom:solid 10px #c2d6eb}
-.home_banner h1 {font:normal bold 45px Arial, Helvetica, sans-serif;color:#fff;text-shadow:0 -1px 1px #000;letter-spacing:-2px}
-.home_banner h2 {font:normal normal 24px Arial, Helvetica, sans-serif;color:#ccc;text-shadow:0 -1px 1px #000;width:520px;}
-
 
 .benefit_details {line-height:20px;height:70px;}
 .page_form {margin:0 50px}

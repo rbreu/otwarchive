@@ -18,10 +18,6 @@ Ctrl+Shift+K:
   description:  Adds software keyboard for each entry field
   script:       "Tr8n.Utils.toggleKeyboards();"
 
-Ctrl+Shift+C:       
-  description:  Displays Tr8n credits
-  script:       "window.location = '/tr8n/home/credits';"
-
 Alt+Shift+D: 
   description:  Opens dashboard
   script:       "window.location = '/tr8n/dashboard';"

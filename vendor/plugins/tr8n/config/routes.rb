@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   [:awards, :chart, :dashboard, :forum, :glossary, :language_cases, 
-   :language, :phrases, :translations, :translator, :home, :login].each do |ctrl|   
+   :language, :phrases, :translations, :translator, :login].each do |ctrl|   
     map.connect "tr8n/#{ctrl}/:action", :controller => "tr8n/#{ctrl}"
   end
 
@@ -12,7 +12,4 @@ ActionController::Routing::Routes.draw do |map|
     map.connect "tr8n/api/v1/#{ctrl}/:action", :controller => "tr8n/api/v1/#{ctrl}"
   end
   
-  map.namespace('tr8n') do |tr8n|
-    tr8n.root :controller => 'home'
-  end
 end
