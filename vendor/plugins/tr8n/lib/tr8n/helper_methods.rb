@@ -124,26 +124,6 @@ module Tr8n::HelperMethods
     javascript_include_tag("/tr8n/javascripts/tr8n_client_sdk.js", :locals => {:opts => opts})
   end
 
-  def tr8n_translator_rank_tag(translator, rank = nil)
-    return "" unless translator
-    
-    rank ||= translator.rank || 0
-    
-    html = "<span dir='ltr'>"
-    1.upto(5) do |i|
-      if rank > i * 20 - 10  and rank < i * 20  
-        html << image_tag("/tr8n/images/rating_star05.png")
-      elsif rank < i * 20 - 10 
-        html << image_tag("/tr8n/images/rating_star0.png")
-      else
-        html << image_tag("/tr8n/images/rating_star1.png")
-      end 
-    end
-    html << "</span>"
-    html.html_safe
-  end
-  
-
   def tr8n_spinner_tag(id = "spinner", label = nil, cls='spinner')
     html = "<div id='#{id}' class='#{cls}' style='display:none'>"
     html << image_tag("/tr8n/images/spinner.gif", :style => "vertical-align:middle;")
@@ -156,7 +136,7 @@ module Tr8n::HelperMethods
     html = "<span id='#{content_id}_open' "
     html << "style='display:none'" unless open
     html << ">"
-    html << link_to_function("#{image_tag("/tr8n/images/arrow_down.gif", :style=>'text-align:center; vertical-align:middle')} #{label}", "Tr8n.Effects.hide('#{content_id}_open'); Tr8n.Effects.show('#{content_id}_closed'); Tr8n.Effects.blindUp('#{content_id}');", :style=> "text-decoration:none")
+    html << link_to_function("#{image_tag("/tr8n/images/arrow_down.gif".html_safe, :style=>'text-align:center; vertical-align:middle')} #{label}", "Tr8n.Effects.hide('#{content_id}_open'); Tr8n.Effects.show('#{content_id}_closed'); Tr8n.Effects.blindUp('#{content_id}');", :style=> "text-decoration:none")
     html << "</span>" 
     html << "<span id='#{content_id}_closed' "
     html << "style='display:none'" if open

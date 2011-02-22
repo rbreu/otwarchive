@@ -2,14 +2,8 @@
 	
 	<%= render :partial => "/tr8n/common/header" %>
 	
-	<div class="section_title">
-		<% if Tr8n::Config.enable_translator_language? %>
-		  <div style="float:right; font-size:12px; padding-top:5px;">
-		     <%=link_to(tra("edit preferences", "Translator preferences link"), :controller => "/tr8n/translator", :action => :index)%>
-		  </div>
-		<% end %>
-		
-	  <%=tra("{user}'s Dashboard", "Dashboard section title", :user => [tr8n_current_translator, :name]) %>
+	<div class="section_title">		
+	  <%=tra("{user}'s Dashboard", "Dashboard section title", :user => current_user.default_pseud.name) %>
 	</div>
 	
 	<div class="section_box" style="background-color:#FDFFF0;">
@@ -23,16 +17,6 @@
 					      </td>
 					      <td style="vertical-align:top">
 									<table>
-										<tr>
-											<td style="width:150px"><%=tra("Your Overall Rank:", "Dashboard section header") %></td>
-											<td>
-									        <%=tr8n_translator_rank_tag(tr8n_current_translator)%>			
-											</td>
-										</tr>
-										<tr>
-											<td><%=tra("Registered On:", "Dashboard section header") %></td>
-											<td><%=tr8n_current_translator.created_at.trl%></td>
-										</tr>
 	                  <tr>
 	                    <td><%=tra("Your Total Translations:", "Dashboard section header") %></td>
 	                    <td><%=tr8n_current_translator.total_metric.total_translations%></td>
@@ -51,7 +35,7 @@
 			                      next if lang.default?
 			                      langs << link_to(lang.english_name, :anchor => lang.locale)  
 			                     end %>       
-			                  <%= langs.join(" | ") %>
+			                  <%= langs.join(" | ").html_safe %>
 	                    </td>
 	                  </tr>
 									</table>
@@ -61,9 +45,6 @@
 						
 	        </td>       
 	      	
-	        <td style="width:50%;padding-top:3px;padding-right:3px;">
-	          <%=render :partial => "translator_metric", :locals => {:translator_metric => tr8n_current_translator.total_metric, :lang => nil} %>
-	        </td>       
 	      </tr>
 	    </table>  
 	</div>
