@@ -221,12 +221,6 @@ class Tr8n::PhrasesController < Tr8n::BaseController
     redirect_to(:action => :view, :translation_key_id => @translation_key.id)
   end
 
-  def dictionary
-    @translation_key = Tr8n::TranslationKey.find(params[:translation_key_id])
-    @definitions = Tr8n::Dictionary.load_definitions_for(@translation_key.words)
-    render :partial => "dictionary", :layout => false
-  end
-  
   def submit_comment
     @translation_key = Tr8n::TranslationKey.find(params[:translation_key_id])
     Tr8n::TranslationKeyComment.create(:language => tr8n_current_language, 

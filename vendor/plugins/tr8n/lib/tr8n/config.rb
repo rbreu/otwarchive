@@ -200,10 +200,6 @@ class Tr8n::Config
     config[:enable_key_caller_tracking]
   end
 
-  def self.enable_dictionary_lookup?
-    config[:enable_dictionary_lookup]
-  end
-
   def self.enable_language_flags?
     config[:enable_language_flags]
   end

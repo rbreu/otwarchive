@@ -16,8 +16,6 @@ defaults: &defaults
   
   enable_software_keyboard:   true      # shows the soft keyboard icon  
   enable_keyboard_shortcuts:  true      # adds some keyboard shortcuts like ctrl+shift+s
-  enable_dictionary_lookup:   true      # shows dictionary words definitions
-  
   enable_fallback_languages:  true      # for example: Catalan can fallback onto Spanish
   enable_translator_language: true      # translator can translate from non-default language
 
