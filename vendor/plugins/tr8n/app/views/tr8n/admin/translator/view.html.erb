@@ -59,14 +59,6 @@
             <%=@translator.blocked? %>
         </td>
     </tr>
-		<tr>
-        <th>
-            Rank
-        </th>
-        <td>
-            <%= (@translator.rank ? (@translator.rank * 100).to_i / 100.0 : 0) %>
-        </td>
-		</tr>	
     <tr>
         <th>
             Last Ip
@@ -101,31 +93,6 @@
     </tr>
     <tr>
         <th>
-            Votes Count
-        </th>
-        <td>
-          <%=@translator.total_metric.total_votes || 0 %>
-          (<span style="color:green"><%=@translator.total_metric.positive_votes || 0 %></span>/<span style="color:red"><%=@translator.total_metric.negative_votes || 0 %></span>)
-        </td>
-    </tr>
-     <tr>
-        <th>
-            Created At
-        </th>
-        <td>
-            <%=@translator.created_at %>
-        </td>
-    </tr>    
-    <tr>
-        <th>
-            Updated At
-        </th>
-        <td>
-            <%=@translator.updated_at %>
-        </td>
-    </tr>
-		<tr>
-        <th>
             Selected Languages
         </th>
         <td>
@@ -148,7 +115,6 @@
           | <%=link_to("Delete", {:action => :delete, :translator_id => @translator.id}, :confirm => "Are you sure you want to do that?")%>
 					
           | <%=link_to("View Translations", "/tr8n/admin/translation?wf_c0=translator_id&wf_o0=is&wf_v0_0=#{@translator.id}") %>
-          | <%=link_to("View Metrics", "/tr8n/admin/translator/metrics?wf_c0=translator_id&wf_o0=is&wf_v0_0=#{@translator.id}") %>
         </td>
     </tr>    
 </table>
@@ -160,35 +126,6 @@
   }  
 </script>
 
-<h1>
-  <div style="font-size:12px; float:right;padding-top:10px;">
-    <%=link_to("view all", "/tr8n/admin/translator/metrics")%>
-  </div>
-
-	Metrics
-</h1>
-<table class="admin_table">
-<thead>
-  <tr>
-    <th style="">Language</th>
-    <th style="">Translations Count</th>
-    <th style="">Votes Count</th>
-  </tr>
-</thead>
-<tbody>
-  <% @translator.translator_metrics.each do |metric| -%>
-    <% next unless metric.language %>
-    <tr>
-      <td><%= link_to(metric.language.english_name, :controller => "/tr8n/admin/language", :action => :view, :lang_id => metric.language.id) %></td>
-      <td><%= metric.total_translations %></td>
-      <td>
-          <%=metric.total_votes || 0 %>
-          (<span style="color:green"><%=metric.positive_votes || 0 %></span>/<span style="color:red"><%=metric.negative_votes || 0 %></span>)
-      </td>
-    </tr>
-  <% end -%>
-</tbody>
-</table>
 <br>
 
 <h1>

@@ -171,7 +171,6 @@ class Tr8n::TranslationsController < Tr8n::BaseController
       trfe("You are not authorized to delete this translation as you were not it's creator")
     else
       translation.destroy_with_log!(tr8n_current_translator)
-      translator.update_rank!
       trfn("Your translation has been removed.")
     end
     

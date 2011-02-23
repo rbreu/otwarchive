@@ -104,8 +104,4 @@ class Tr8n::Admin::TranslatorController < Tr8n::Admin::BaseController
     @logs = Tr8n::TranslatorLog.filter(:params => params, :filter => Tr8n::TranslatorLogFilter)
   end
 
-  def metrics
-    @metrics = Tr8n::TranslatorMetric.filter(:params => params, :filter => Tr8n::TranslatorMetricFilter)
-  end
-
 end

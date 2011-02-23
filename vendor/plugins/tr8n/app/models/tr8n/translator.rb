@@ -28,7 +28,6 @@ class Tr8n::Translator < ActiveRecord::Base
   
   has_many  :translator_logs,               :class_name => "Tr8n::TranslatorLog",             :dependent => :destroy, :order => "created_at desc"
   has_many  :translator_following,          :class_name => "Tr8n::TranslatorFollowing",       :dependent => :destroy, :order => "created_at desc"
-  has_many  :translator_metrics,            :class_name => "Tr8n::TranslatorMetric",          :dependent => :destroy
   has_many  :translations,                  :class_name => "Tr8n::Translation",               :dependent => :destroy
   has_many  :translation_votes,             :class_name => "Tr8n::TranslationVote",           :dependent => :destroy
   has_many  :translation_key_locks,         :class_name => "Tr8n::TranslationKeyLock",        :dependent => :destroy
@@ -63,34 +62,6 @@ class Tr8n::Translator < ActiveRecord::Base
     translator
   end
   
-  def total_metric
-    @total_metric ||= Tr8n::TranslatorMetric.find_or_create(self, nil)
-  end
-
-  def metric_for(language)
-    Tr8n::TranslatorMetric.find_or_create(self, language)
-  end
-
-  def update_metrics!(language = Tr8n::Config.current_language)
-    # calculate total metrics
-    total_metric.update_metrics!
-    
-    # calculate language specific metrics
-    metric_for(language).update_metrics!
-  end
-  
-  def update_rank!(language = Tr8n::Config.current_language)
-    # calculate total rank
-    total_metric.update_rank!
-    
-    # calculate language specific rank
-    metric_for(language).update_rank!
-  end
-    
-  def rank
-    total_metric.rank
-  end
-    
   def block!(actor, reason = "No reason given")
     update_attributes(:blocked => true, :inline_mode => false)
     Tr8n::TranslatorLog.log_admin(self, :got_blocked, actor, reason)

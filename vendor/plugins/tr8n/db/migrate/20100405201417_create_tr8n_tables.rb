@@ -103,7 +103,6 @@ class CreateTr8nTables < ActiveRecord::Migration
       t.boolean :inline_mode, :default => false
       t.boolean :blocked,     :default => false
       t.integer :fallback_language_id
-      t.integer :rank,        :default => 0 
       t.timestamps
     end
     add_index :tr8n_translators, [:user_id]
@@ -121,21 +120,6 @@ class CreateTr8nTables < ActiveRecord::Migration
     add_index :tr8n_translator_logs, [:translator_id]
     add_index :tr8n_translator_logs, [:user_id]
     add_index :tr8n_translator_logs, [:created_at]
-    
-    create_table :tr8n_translator_metrics do |t|
-      t.integer :translator_id,         :null => false
-      t.integer :language_id,           :limit => 8
-      t.integer :total_translations,    :default => 0
-      t.integer :total_votes,           :default => 0
-      t.integer :positive_votes,        :default => 0
-      t.integer :negative_votes,        :default => 0
-      t.integer :accepted_translations, :default => 0
-      t.integer :rejected_translations, :default => 0
-      t.timestamps
-    end
-    add_index :tr8n_translator_metrics, [:translator_id]
-    add_index :tr8n_translator_metrics, [:translator_id, :language_id]
-    add_index :tr8n_translator_metrics, [:created_at]
     
     create_table :tr8n_translation_keys do |t|
       t.string  :key,   :null => false
@@ -201,7 +185,6 @@ class CreateTr8nTables < ActiveRecord::Migration
     drop_table :tr8n_language_metrics
     drop_table :tr8n_translators
     drop_table :tr8n_translator_logs
-    drop_table :tr8n_translator_metrics
     drop_table :tr8n_translation_keys
     drop_table :tr8n_translation_sources
     drop_table :tr8n_translation_key_sources
