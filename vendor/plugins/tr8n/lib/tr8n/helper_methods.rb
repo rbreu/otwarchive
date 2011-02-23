@@ -97,11 +97,6 @@ module Tr8n::HelperMethods
     render(:partial => '/tr8n/common/language_table', :locals => {:opts => opts.merge(:name => :english)})    
   end
 
-  def tr8n_translator_login_tag(opts = {})
-    opts[:class] ||= 'tr8n_right_horiz_list'
-    render(:partial => '/tr8n/common/translator_login', :locals => {:opts => opts})    
-  end
-
   def tr8n_flashes_tag(opts = {})
     render(:partial => '/tr8n/common/flashes', :locals => {:opts => opts})    
   end
