@@ -167,12 +167,6 @@ class Tr8n::Language < ActiveRecord::Base
     end
   end
 
-  def self.featured_languages
-    Tr8n::Cache.fetch("featured_languages") do 
-      find(:all, :conditions => ["enabled = ? and featured_index is not null and featured_index > 0", true], :order => "featured_index desc")
-    end
-  end
-
   def self.translate(label, desc = "", tokens = {}, options = {})
     # raise Tr8n::Exception.new("The label is blank") if label.blank?
     raise Tr8n::Exception.new("The label is being translated twice") if label.tr8n_translated?
@@ -285,13 +279,11 @@ class Tr8n::Language < ActiveRecord::Base
 
   def after_save
     Tr8n::Cache.delete("language_#{locale}")
-    Tr8n::Cache.delete("featured_languages")
     Tr8n::Cache.delete("enabled_languages")
   end
 
   def after_destroy
     Tr8n::Cache.delete("language_#{locale}")
-    Tr8n::Cache.delete("featured_languages")
     Tr8n::Cache.delete("enabled_languages")
   end
 

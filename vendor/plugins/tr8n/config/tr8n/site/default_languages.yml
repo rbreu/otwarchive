@@ -220,7 +220,6 @@
   native_name: "中文(台灣)"
   enabled:  true
   fallback_key: "zh"
-  featured_index: 100
 "cv":
   english_name: "Chuvash"
   native_name: "чӑваш"
@@ -305,7 +304,6 @@
   english_name: "English (US)"
   native_name: "English (US)"
   enabled:  true
-  featured_index: 1000
 "en-ZW":
   english_name: "English (Zimbabwe)"
   native_name: "English (Zimbabwe)"
@@ -318,7 +316,6 @@
   english_name: "Estonian"
   native_name: "Eesti"
   enabled:  tru
-  featured_index: 300
 "fo":
   english_name: "Faroese"
   native_name: "Føroyskt"
@@ -339,7 +336,6 @@
   english_name: "French"
   native_name: "Français"
   enabled:  true
-  featured_index: 700
 "fr-BE":
   english_name: "French (Belgium)"
   native_name: "Français (Belgium)"
@@ -384,7 +380,6 @@
   english_name: "German"
   native_name: "Deutsch"
   enabled:  true
-  featured_index: 600
 "de-AT":
   english_name: "German (Austria)" 
   native_name: "Deutsch (Austria)"
@@ -438,7 +433,6 @@
   native_name: "עברית"
   right_to_left: true
   enabled:  true
-  featured_index: 200
 "hi":
   english_name: "Hindi"
   native_name: "हिन्दी"
@@ -479,7 +473,6 @@
   english_name: "Italian"
   native_name: "Italiano"
   enabled:  true
-  featured_index: 500
 "it-ch":
   english_name: "Italian (Switzerland)"
   native_name: "Italiano (Switzerland)"
@@ -733,7 +726,6 @@
   english_name: "Portuguese (Portugal)"
   native_name: "Português (Portugal)"
   enabled:  true
-  featured_index: 800
 "pt-BZ":
   english_name: "Portuguese (Brazil)"
   native_name: "Português (Brazil)"
@@ -770,7 +762,6 @@
   english_name: "Russian"
   native_name: "Русский"
   enabled:  true
-  featured_index: 400
 "sm":
   english_name: "Samoan"
   native_name: "Samoan"
@@ -851,7 +842,6 @@
   english_name: "Spanish"
   native_name: "Español"
   enabled:  true
-  featured_index: 900
 "es-AR":
   english_name: "Spanish (Argentina)"
   native_name: "Español (Argentina)"

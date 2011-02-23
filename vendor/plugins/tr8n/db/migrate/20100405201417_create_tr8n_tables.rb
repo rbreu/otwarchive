@@ -32,7 +32,6 @@ class CreateTr8nTables < ActiveRecord::Migration
       t.integer :completeness
       t.integer :fallback_language_id
       t.text    :curse_words  
-      t.integer :featured_index, :default => 0
       t.timestamps
     end
     add_index :tr8n_languages, [:locale]

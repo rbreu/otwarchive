@@ -68,15 +68,6 @@ namespace :tr8n do
     end 
   end
 
-  desc "Creates featured languages"
-  task :featured_languages => :environment do
-    Tr8n::Config.config[:featured_languages].each_with_index do |locale, index|
-      lang = Tr8n::Language.for(locale)
-      lang.featured_index = 10000 - (index * 100)
-      lang.save
-    end
-  end
-  
   task :rtl_languages => :environment do
     File.open('rtllanguages.yml', 'w') do |f| 
       Tr8n::Language.find(:all, :conditions => ["right_to_left = ?", true], :order => "english_name asc").each do |l|

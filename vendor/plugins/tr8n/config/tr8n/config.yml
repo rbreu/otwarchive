@@ -25,19 +25,6 @@ defaults: &defaults
   enable_language_cases:      true      # enables support for language cases
   enable_client_sdk:          true     # allows javascript to use tr8nProxy object
   
-
-  #############################################################################
-  # Featured languages can be added as a bottom strip bar on all pages using
-  #
-  #  <%= tr8n_language_strip_tag %>
-  # 
-  # The featured languages can be configured in the admin tool.
-  # Alternatively, you can provide the list of languages here, and run:
-  # 
-  #  rake tr8n:featured_languages 
-  #
-  #############################################################################
-  featured_languages:         ["en-US", "es", "pt", "fr", "de", "it", "ru", "et", "iw", "zh-TW"]
   
   #############################################################################
   # Set the following flag to true if you would like to allow any registered 
