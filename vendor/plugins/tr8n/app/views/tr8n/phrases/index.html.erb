@@ -1,30 +1,8 @@
 <% Tr8n::Config.with_options(:default_locale => 'en-US', :admin => true) do %>
 	<%= render :partial => "/tr8n/common/header" %>
 	<%= render :partial => "breadcrumb" %>
-	
-  <div class="section_box" style="margin-bottom:10px; background-color:#EFF8FF; margin-top:0px;">
-	  <% form_tag({:action => :index}, {:method => :get, :id => "translations_search_form"}) do %>
-	      <%=hidden_field_tag(:section_key, @section_key) %>
-			  <div style="float:right">
-	        <button type="submit" class="translator_btn translator_small_btn" onClick="Tr8n.Effects.submit('translations_search_form'); return false;">
-	            <span><%=tra("Search", "Search button label")%></span>
-	        </button>
-			  </div>
-				
-	    	<%=text_field_tag(:search, params[:search], {:style => "width:90%;font-size:12px;height:20px"})%><br>
-				<div style="margin-top:10px; padding:3px; font-size:11px; color:#666; font-weight:bold;">
-	          <%=tra("Search phrases", "Phrases search filter header")%>
-	          <%=select_tag(:phrase_type, tr8n_options_for_select(Tr8n::TranslationKey.filter_phrase_type_options, params[:phrase_type]), :onChange => "toggleFilterOptions()")%>
-	          <span id="extended_filter_options" style="<%='display:none' unless params[:phrase_type]=="with" %>">
-	            <%=tra("marked as", "Phrases search filter option")%>
-	            <%=select_tag(:phrase_status, tr8n_options_for_select(Tr8n::TranslationKey.filter_phrase_status_options, params[:phrase_status]))%>
-	          </span>
-						<%=tra("include", "Phrases search filter option")%>
-						<%=select_tag(:phrase_lock, tr8n_options_for_select(Tr8n::TranslationKey.filter_phrase_lock_options, params[:phrase_lock]))%>
-	      </div>
-									
-	  <% end %>
-	</div>
+
+	<div style="color:red">Here be place for search/filter options (show all with x number of translations, ...)</div>
 	
 	<div style="margin-top:10px; margin-bottom:10px; border: 1px dotted #ccc; padding:10px;">
     <% if @translation_keys.any? %>

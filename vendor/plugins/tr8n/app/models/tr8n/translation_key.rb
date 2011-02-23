@@ -192,10 +192,6 @@ class Tr8n::TranslationKey < ActiveRecord::Base
     not locked?(language)
   end
 
-  def followed?(translator = Tr8n::Config.current_translator)
-    Tr8n::TranslatorFollowing.following_for(translator, self)
-  end
-    
   def add_translation(label, rules = nil, language = Tr8n::Config.current_language, translator = Tr8n::Config.current_translator)
     raise Tr8n::Exception.new("The sentence contains dirty words") unless language.clean_sentence?(label)
     
@@ -504,8 +500,7 @@ class Tr8n::TranslationKey < ActiveRecord::Base
   def self.filter_phrase_type_options
     [["all", "any"], 
      ["without translations", "without"], 
-     ["with translations", "with"],
-     ["followed by me", "followed"]
+     ["with translations", "with"]
     ] 
   end
   
@@ -555,14 +550,8 @@ class Tr8n::TranslationKey < ActiveRecord::Base
     elsif params[:phrase_type] == "without"
       conditions[0] << " and tr8n_translation_keys.id not in (select tr8n_translations.translation_key_id from tr8n_translations where tr8n_translations.language_id = ?)"
       conditions << Tr8n::Config.current_language.id
-      
-    elsif params[:phrase_type] == "followed"
-      conditions[0] << " and tr8n_translation_keys.id in (select tr8n_translator_following.object_id from tr8n_translator_following where tr8n_translator_following.translator_id = ? and tr8n_translator_following.object_type = ?)"
-      
-      conditions << Tr8n::Config.current_translator.id
-      conditions << 'Tr8n::TranslationKey'
     end
-    
+
     if params[:phrase_lock] == "locked"
       conditions[0] << " and tr8n_translation_keys.id in (select tr8n_translation_key_locks.translation_key_id from tr8n_translation_key_locks where tr8n_translation_key_locks.language_id = ? and tr8n_translation_key_locks.locked = ?) "
       conditions << Tr8n::Config.current_language.id
