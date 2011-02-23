@@ -29,7 +29,6 @@ class CreateTr8nTables < ActiveRecord::Migration
       t.string  :native_name
       t.boolean :enabled
       t.boolean :right_to_left
-      t.integer :completeness
       t.integer :fallback_language_id
       t.text    :curse_words  
       t.timestamps
