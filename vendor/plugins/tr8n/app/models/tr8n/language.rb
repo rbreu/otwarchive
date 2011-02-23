@@ -85,11 +85,7 @@ class Tr8n::Language < ActiveRecord::Base
   def default?
     self.locale == Tr8n::Config.default_locale
   end
-  
-  def flag
-    locale
-  end
-  
+    
   # deprecated
   def has_rules?
     rules?

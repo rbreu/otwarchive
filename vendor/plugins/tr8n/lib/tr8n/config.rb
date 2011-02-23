@@ -186,10 +186,6 @@ class Tr8n::Config
     config[:enable_key_caller_tracking]
   end
 
-  def self.enable_language_flags?
-    config[:enable_language_flags]
-  end
-
   def self.enable_language_stats?
     config[:enable_language_stats]
   end
