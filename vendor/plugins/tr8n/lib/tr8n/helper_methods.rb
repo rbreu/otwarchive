@@ -110,10 +110,6 @@ module Tr8n::HelperMethods
     render(:partial => '/tr8n/common/scripts', :locals => {:opts => opts})    
   end
   
-  def tr8n_client_sdk_scripts_tag(opts = {})
-    javascript_include_tag("/tr8n/javascripts/tr8n_client_sdk.js", :locals => {:opts => opts})
-  end
-
   def tr8n_spinner_tag(id = "spinner", label = nil, cls='spinner')
     html = "<div id='#{id}' class='#{cls}' style='display:none'>"
     html << image_tag("/tr8n/images/spinner.gif", :style => "vertical-align:middle;")

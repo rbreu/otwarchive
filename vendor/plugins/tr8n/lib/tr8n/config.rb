@@ -233,10 +233,6 @@ class Tr8n::Config
     config[:localization]
   end
 
-  def self.api
-    config[:api]
-  end
-
   #########################################################
   # Caching
   def self.enable_caching?
@@ -638,14 +634,6 @@ class Tr8n::Config
 
   def self.manager_level
     1000
-  end
-  #########################################################
-  def self.enable_api?
-    api[:enabled]
-  end
-
-  def self.enable_client_sdk?
-    config[:enable_client_sdk]
   end
 
   #########################################################

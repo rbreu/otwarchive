@@ -47,12 +47,6 @@ class Tr8n::TranslationKey < ActiveRecord::Base
     tkey = Tr8n::Cache.fetch("translation_key_#{key}") do 
       existing_key = find_by_key(key) 
       
-      unless existing_key
-        if options[:api] and (not Tr8n::Config.api[:allow_key_registration])
-          raise Tr8n::KeyRegistrationException.new("Key registration through API is disabled!")  
-        end
-      end
-      
       existing_key ||= begin
         new_tkey = create(:key => key, 
                           :label => label, 
@@ -363,7 +357,6 @@ class Tr8n::TranslationKey < ActiveRecord::Base
   end
   
   def translate(language = Tr8n::Config.current_language, token_values = {}, options = {})
-    return find_all_valid_translations(valid_translations_for(language)) if options[:api]
     
     if Tr8n::Config.disabled? or language.default?
       return substitute_tokens(label, token_values, options.merge(:fallback => false), language)
