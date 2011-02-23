@@ -59,15 +59,6 @@ defaults: &defaults
     version:                  1 # you can change the version to invalidate the cache
 
   #############################################################################
-  # By default, Tr8n will use its own logger. If you set it to false,  
-  # it will use default Rails logger.
-  #############################################################################
-  logger:
-    enabled:                  true
-    log_path:                 log/tr8n.log          # location of the log file
-    enable_paranoia_mode:     true                  # logs every translator action
-
-  #############################################################################
   # Site Integration Settings
   #############################################################################
   site_info:  

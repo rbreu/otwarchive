@@ -45,10 +45,6 @@ class Tr8n::Config
     Thread.current[:tr8n_current_language] ||= default_language
   end
   
-  def self.current_user_is_translator?
-    Thread.current[:tr8n_current_translator] != nil
-  end
-  
   def self.block_options
     Thread.current[:tr8n_block_options] ||= {}
   end
@@ -216,10 +212,6 @@ class Tr8n::Config
     config[:caching]
   end
 
-  def self.logger
-    config[:logger]
-  end
-  
   def self.site_info
     config[:site_info]
   end
@@ -249,22 +241,6 @@ class Tr8n::Config
   def self.cache_version
     caching[:version]
   end
-  #########################################################
-
-  #########################################################
-  # Logger
-  def self.enable_logger?
-    logger[:enabled]
-  end
-
-  def self.log_path
-    logger[:log_path]
-  end
-
-  def self.enable_paranoia_mode?
-    logger[:enable_paranoia_mode]
-  end
-  #########################################################
   
   #########################################################
   # Site Info
@@ -363,90 +339,26 @@ class Tr8n::Config
     user_class_name.constantize
   end
 
-  def self.user_id(user)
-    begin
-      user.send(site_user_info[:methods][:id])
-    rescue Exception => ex
-      Tr8n::Logger.error("Failed to fetch user id: #{ex.to_s}")
-      return 0
-    end  
-  end
-
-  def self.user_name(user)
-    begin
-      user.send(site_user_info[:methods][:name])
-    rescue Exception => ex
-      Tr8n::Logger.error("Failed to fetch #{user_class_name} name: #{ex.to_s}")
-      return "Unknown user"
-    end  
-  end
-
   def self.user_gender(user)
-    begin
-      user.send(site_user_info[:methods][:gender])
-    rescue Exception => ex
-      Tr8n::Logger.error("Failed to fetch #{user_class_name} name: #{ex.to_s}")
-      return "unknown"
-    end  
+    user.send(site_user_info[:methods][:gender])
   end
 
   def self.user_mugshot(user)
-    begin
-      user.send(site_user_info[:methods][:mugshot])
-    rescue Exception => ex
-      Tr8n::Logger.error("Failed to fetch #{user_class_name} image: #{ex.to_s}")
-      return silhouette_image
-    end  
+    user.send(site_user_info[:methods][:mugshot])
   end
 
   def self.user_link(user)
-    begin
-      user.send(site_user_info[:methods][:link])
-    rescue Exception => ex
-      Tr8n::Logger.error("Failed to fetch #{user_class_name} link: #{ex.to_s}")
-      return "/tr8n"
-    end  
+    "blahblah"
   end
 
   def self.user_locale(user)
-    begin
-      user.send(site_user_info[:methods][:locale])
-    rescue Exception => ex
-      Tr8n::Logger.error("Failed to fetch #{user_class_name} locale: #{ex.to_s}")
-      return default_locale
-    end  
+    user.send(site_user_info[:methods][:locale])
   end
 
   def self.admin_user?(user = current_user)
-    begin
-      user.send(site_user_info[:methods][:admin])
-    rescue Exception => ex
-      Tr8n::Logger.error("Failed to fetch #{user_class_name} admin flag: #{ex.to_s}")
-      return false
-    end  
+    !guest_user?
   end
 
-  def self.current_user_is_admin?
-    admin_user?
-  end
-  
-  def self.guest_user?(user = current_user)
-    return true unless user
-    begin
-      user.send(site_user_info[:methods][:guest])
-    rescue Exception => ex
-      Tr8n::Logger.error("Failed to fetch #{user_class_name} guest flag: #{ex.to_s}")
-      return true
-    end  
-  end
-  
-  def self.current_user_is_guest?
-    guest_user?
-  end
-  
-  def self.silhouette_image
-    "/tr8n/images/photo_silhouette.gif"
-  end
   
   #########################################################
   # rules engine
