@@ -53,24 +53,10 @@ class Tr8n::Admin::LanguageController < Tr8n::Admin::BaseController
     redirect_to_source
   end
     
-  def metrics
-    @metrics = Tr8n::LanguageMetric.filter(:params => params, :filter => Tr8n::LanguageMetricFilter)
-  end
-
   def users
     @users = Tr8n::LanguageUser.filter(:params => params, :filter => Tr8n::LanguageUserFilter)
   end
 
-  def calculate_metrics
-    Tr8n::LanguageMetric.calculate_language_metrics
-    redirect_to_source
-  end
-
-  def calculate_total_metrics
-    Tr8n::LanguageMetric.calculate_total_metrics
-    redirect_to_source
-  end
-  
   def rules
     @rules = Tr8n::LanguageRule.filter(:params => params, :filter => Tr8n::LanguageRuleFilter)
   end

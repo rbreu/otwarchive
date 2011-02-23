@@ -82,21 +82,6 @@ class CreateTr8nTables < ActiveRecord::Migration
     add_index :tr8n_language_users, [:created_at]
     add_index :tr8n_language_users, [:updated_at]
     
-    create_table :tr8n_language_metrics do |t|
-      t.string  :type
-      t.integer :language_id,           :null => false
-      t.date    :metric_date
-      t.integer :user_count,            :default => 0
-      t.integer :translator_count,      :default => 0
-      t.integer :translation_count,     :default => 0
-      t.integer :key_count,             :default => 0
-      t.integer :locked_key_count,      :default => 0
-      t.integer :translated_key_count,  :default => 0
-      
-      t.timestamps
-    end
-    add_index :tr8n_language_metrics, [:language_id]
-    add_index :tr8n_language_metrics, [:created_at]
     
     create_table :tr8n_translators do |t|
       t.integer :user_id,     :null => false
@@ -181,7 +166,6 @@ class CreateTr8nTables < ActiveRecord::Migration
     drop_table :tr8n_language_users
     drop_table :tr8n_language_cases
     drop_table :tr8n_language_case_value_maps
-    drop_table :tr8n_language_metrics
     drop_table :tr8n_translators
     drop_table :tr8n_translator_logs
     drop_table :tr8n_translation_keys

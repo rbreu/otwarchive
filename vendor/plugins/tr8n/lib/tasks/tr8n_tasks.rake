@@ -51,16 +51,6 @@ namespace :tr8n do
     end
   end
 
-  desc "Resets all metrics"
-  task :reset_metrics => :environment do
-    Tr8n::LanguageMetric.reset_metrics
-  end
-
-  desc "Calculates metrics"
-  task :metrics => :environment do
-    Tr8n::LanguageMetric.calculate_language_metrics
-  end
-
   desc "Initializes default language cases"
   task :language_cases => :environment do
     Tr8n::Language.all.each do |lang|

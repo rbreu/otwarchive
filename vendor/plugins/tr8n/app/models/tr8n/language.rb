@@ -31,7 +31,6 @@ class Tr8n::Language < ActiveRecord::Base
   has_many :language_users,         :class_name => 'Tr8n::LanguageUser',        :dependent => :destroy
   has_many :translations,           :class_name => 'Tr8n::Translation',         :dependent => :destroy
   has_many :translation_key_locks,  :class_name => 'Tr8n::TranslationKeyLock',  :dependent => :destroy
-  has_many :language_metrics,       :class_name => 'Tr8n::LanguageMetric'
   
   def self.find_or_create(lcl, english_name)
     find_by_locale(lcl) || create(:locale => lcl, :english_name => english_name) 
@@ -212,29 +211,6 @@ class Tr8n::Language < ActiveRecord::Base
 
   def has_gender_rules?
     dependencies.include?("gender")
-  end
-
-  def update_daily_metrics_for(metric_date)
-    metric = Tr8n::DailyLanguageMetric.find(:first, :conditions => ["language_id = ? and metric_date = ?", self.id, metric_date])
-    metric ||= Tr8n::DailyLanguageMetric.create(:language_id => self.id, :metric_date => metric_date)
-    metric.update_metrics!
-  end
-
-  def update_monthly_metrics_for(metric_date)
-    metric = Tr8n::MonthlyLanguageMetric.find(:first, :conditions => ["language_id = ? and metric_date = ?", self.id, metric_date])
-    metric ||= Tr8n::MonthlyLanguageMetric.create(:language_id => self.id, :metric_date => metric_date)
-    metric.update_metrics!
-  end
-
-  def total_metric
-    @total_metric ||= begin
-      metric = Tr8n::TotalLanguageMetric.find(:first, :conditions => ["language_id = ?", self.id])
-      metric || Tr8n::TotalLanguageMetric.create(Tr8n::LanguageMetric.default_attributes.merge(:language_id => self.id))
-    end
-  end
-
-  def update_total_metrics
-    total_metric.update_metrics!
   end
 
   def prohibited_words

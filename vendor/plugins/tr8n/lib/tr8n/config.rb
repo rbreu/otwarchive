@@ -71,7 +71,7 @@ class Tr8n::Config
 
   def self.models
     [ 
-       Tr8n::LanguageRule, Tr8n::LanguageUser, Tr8n::Language, Tr8n::LanguageMetric,
+       Tr8n::LanguageRule, Tr8n::LanguageUser, Tr8n::Language,
        Tr8n::LanguageCase, Tr8n::LanguageCaseValueMap, Tr8n::LanguageCaseRule,
        Tr8n::TranslationKey, Tr8n::TranslationKeySource, Tr8n::TranslationKeyComment, Tr8n::TranslationKeyLock, 
        Tr8n::TranslationSource, Tr8n::TranslationDomain,

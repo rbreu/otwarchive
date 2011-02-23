@@ -5,7 +5,6 @@
 
 <%=link_to_function("+ Add New Language", "tr8nLightbox.show('/tr8n/admin/language/lb_update', {height:350})")%>
  | 
-<%=link_to_function("Calculate Completeness", 'calculateCompleteness()')%>
 <br>
 
 <% form_tag("", :id => "languages_form") do %>
@@ -35,23 +34,6 @@
 	    html << '</span>'
 	    html.join(' ')
 	  }],
-	  [:users, lambda{|lang| lang.total_metric.user_count}, 'text-align:right;'], 
-	  [:translators, lambda{|lang| lang.total_metric.translator_count}, 'text-align:right;'], 
-	  [:translations, lambda{|lang| lang.total_metric.translation_count}, 'text-align:right;'], 
-	  [:completeness, lambda{|lang|
-	    html = []
-	    completeness = lang.completeness ? lang.completeness : 0
-	    if completeness > 90
-	      html << '<span style="color:green">'
-	    elsif completeness > 60 
-	      html << '<span style="color:yellow">'
-	    else  
-	      html << '<span style="color:red">'
-	    end
-	    html << "#{completeness}%"
-	    html << '</span>'
-	    html.join(' ')
-	  }, 'text-align:right;'],
 	  [:actions, lambda{|lang|
 	     html = [] 
 	     html << link_to_function("Update", "tr8nLightbox.show('/tr8n/admin/language/lb_update?lang_id=#{lang.id}', {height:350})")
@@ -72,12 +54,6 @@
 ['Disable Selected Languages', 'disableSelectedLanguages()']]) %>
 
 <script>
-	function calculateCompleteness() {
-		if (!confirm('Are you sure you want to run this opperation?'))
-		   return;
-			    
-	  location = '/tr8n/admin/language/calculate_total_metrics'	
-	}
 	
   function disableSelectedLanguages() {
     if (!confirm("Are you sure you want to disable those languages?")) return;
