@@ -1,6 +1,6 @@
 To get tr8n running:
 
-1.) (Hack, need better solution) Remove "description" from FIELDS_ALLOWING_HTML in local.yml, because some of the tr8n tables have description fields too and it's messing with our monkey patching.
+1.) (Hack, need better solution) Remove "description" and "rules" from FIELDS_ALLOWING_HTML in local.yml, because some of the tr8n tables have description fields too and it's messing with our monkey patching.
 
 2.) Run:
 

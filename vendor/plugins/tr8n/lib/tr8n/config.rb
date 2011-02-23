@@ -81,7 +81,7 @@ class Tr8n::Config
        Tr8n::TranslationSource, Tr8n::TranslationDomain,
        Tr8n::Translation, Tr8n::TranslationVote,
        Tr8n::Translator, Tr8n::TranslatorLog, Tr8n::TranslatorMetric, 
-       Tr8n::TranslatorFollowing, Tr8n::TranslatorReport, 
+       Tr8n::TranslatorFollowing, 
     ]    
   end
 

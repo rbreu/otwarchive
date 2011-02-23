@@ -28,7 +28,7 @@ class Tr8n::LanguageCasesController < Tr8n::BaseController
     
   # used by a client app
   def index
-    conditions = ["language_id = ? and (reported is null or reported = ?)", tr8n_current_language.id, false]
+    conditions = ["language_id = ?", tr8n_current_language.id]
     
     unless params[:search].blank?
       conditions[0] << " and keyword like ?" 
@@ -50,14 +50,14 @@ class Tr8n::LanguageCasesController < Tr8n::BaseController
   
   def switch_manager_mode
     @map = Tr8n::LanguageCaseValueMap.by_language_and_keyword(tr8n_current_language, params[:map_keyword])
-    @map ||= Tr8n::LanguageCaseValueMap.new(:language => tr8n_current_language, :keyword => params[:case_key], :reported => false)
+    @map ||= Tr8n::LanguageCaseValueMap.new(:language => tr8n_current_language, :keyword => params[:case_key])
     
     render :partial => params[:mode]
   end
   
   def update_value_map
     map = Tr8n::LanguageCaseValueMap.find_by_id(params[:map_id]) unless params[:map_id].blank?
-    map ||= Tr8n::LanguageCaseValueMap.new(:language => tr8n_current_language, :reported => false)
+    map ||= Tr8n::LanguageCaseValueMap.new(:language => tr8n_current_language)
     map.keyword = params[:case_key]
     map.map = params[:map][:map]
     map.save_with_log!(tr8n_current_translator)
@@ -69,13 +69,6 @@ class Tr8n::LanguageCasesController < Tr8n::BaseController
     map = Tr8n::LanguageCaseValueMap.find_by_id(params[:map_id]) if params[:map_id]
     map.destroy_with_log!(tr8n_current_translator) if map
 
-    redirect_to_source
-  end
-  
-  def report_value_map
-    map = Tr8n::LanguageCaseValueMap.find_by_id(params[:map_id]) unless params[:map_id].blank?
-    map.report_with_log!(tr8n_current_translator) if map
-    
     redirect_to_source
   end
   

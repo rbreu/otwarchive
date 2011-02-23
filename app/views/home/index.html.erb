@@ -45,6 +45,7 @@
   <div class="open-beta-box">
     <% if logged_in? %>
       <h2><%= tr('Welcome to open beta!') %></h2>
+      <%= tr("You have {count||message}", "Inbox count label", :count => 5) %>
       <h1><%= link_to tr('INVITE A FRIEND'), user_invitations_path(current_user) %></h1> 
     <% else %>
       <% if @admin_settings.account_creation_enabled? %>

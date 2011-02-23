@@ -142,7 +142,7 @@ namespace :tr8n do
     puts "Running verification process..."
     t0 = Time.now
 
-    log_path = Tr8n::KeyLogger.logfile_path
+    log_path = "tr8n_keylogger.log"
     
     puts "Looking up log file at location..."
     puts "File path: #{log_path}"

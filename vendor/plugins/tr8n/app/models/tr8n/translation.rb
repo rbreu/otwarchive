@@ -45,9 +45,6 @@ class Tr8n::Translation < ActiveRecord::Base
     
     self.translator.update_rank!(language) if self.translator
     
-    # add the translator to the watch list
-    self.translator.update_attributes(:reported => true) if score < VIOLATION_INDICATOR
-    
     translator.voted_on_translation!(self)
     translator.update_metrics!(language)
   end

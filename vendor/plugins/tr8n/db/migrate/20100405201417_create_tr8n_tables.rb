@@ -102,7 +102,6 @@ class CreateTr8nTables < ActiveRecord::Migration
       t.integer :user_id,     :null => false
       t.boolean :inline_mode, :default => false
       t.boolean :blocked,     :default => false
-      t.boolean :reported,    :default => false
       t.integer :fallback_language_id
       t.integer :rank,        :default => 0 
       t.timestamps

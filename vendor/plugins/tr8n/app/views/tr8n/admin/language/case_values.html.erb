@@ -11,7 +11,7 @@
       else
          "Deleted Language"    
       end  
-    }], :keyword, :map, :reported, 
+    }], :keyword, :map, 
     [:translator_id, lambda{|lcase|
       if lcase.translator
         link_to(lcase.translator.name, :controller => "/tr8n/admin/translator", :action => :view, :translator_id => lcase.translator.id)

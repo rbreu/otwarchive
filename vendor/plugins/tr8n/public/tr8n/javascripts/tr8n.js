@@ -188,12 +188,6 @@ Tr8n.Translator.prototype = {
     }, 500);
   },
 
-  reportTranslation: function(key, translation_id) {
-    var msg = "Reporting this translation will remove it from this list and the translator will be put on a watch list. \n\nAre you sure you want to report this translation?";
-    if (!confirm(msg)) return;
-    this.voteOnTranslation(key, translation_id, -1000);
-  },
-
   voteOnTranslation: function(key, translation_id, vote) {
     Tr8n.Effects.hide('tr8n_votes_for_' + translation_id);
     Tr8n.Effects.show('tr8n_spinner_for_' + translation_id);
@@ -409,16 +403,6 @@ Tr8n.LanguageCaseManager.prototype = {
       evalScripts: true,
       parameters: {mode: mode, case_key: self.case_key}
     });
-  },
-
-  reportCaseMap: function(map_id) {
-    var msg = "Reporting these values will remove them from the system and the translator will be put on a watch list. \n\nAre you sure you want to report these values?";
-    if (!confirm(msg)) return;
-
-    Tr8n.element("tr8n_language_case_form").action = "/tr8n/language_cases/report_value_map";
-    Tr8n.Effects.hide('tr8n_language_case_exception_container');
-    Tr8n.Effects.show('tr8n_language_case_report_spinner');
-    Tr8n.Effects.submit('tr8n_language_case_form');
   },
 
   submitCaseMap: function() {
