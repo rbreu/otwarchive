@@ -40,7 +40,7 @@ defaults: &defaults
     controller:       language
     actions:          [index]
     default_language: true
-    manager_only:     true
+    manager_only:     false
   
   test:
     title:            Test

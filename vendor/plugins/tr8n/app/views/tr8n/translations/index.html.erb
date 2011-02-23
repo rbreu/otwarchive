@@ -3,6 +3,9 @@
 	
 	<div style="color:red">Here be place for search/filter options (show all with x votes, all by translator x, ...; sort by date or votes, ...)</div>
 
+	<br/>
+	<div style="color:red">Thoughts about translations: A translation gets a vote by the translator. (They can downvote it if they don't like their suggestion anymore and can create a new translation. They can also delete their translations, but maybe they don't want the old one to get lost.) A beta looks over a translation and votes. (Maybe a second beta votes, too.) In inline translation mode, we can show different colours for differnt amount of votes or give other indicators so translators see where work is needed. If a translator changes their translations, votes get reset. The translation with the most votes is the one currently used on the site. There are comments attached to a translation so that people can discuss.</div>
+
 	<div class="section_box">
 	  <%= render :partial => "list", :locals => {:language => tr8n_current_language, :translations => @translations, :mode => :list} %>
 	</div>
