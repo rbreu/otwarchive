@@ -53,14 +53,6 @@
     </tr> 
     <tr>
         <th>
-            Blocked
-        </th>
-        <td>
-            <%=@translator.blocked? %>
-        </td>
-    </tr>
-    <tr>
-        <th>
             Last Ip
         </th>
         <td>
@@ -106,12 +98,6 @@
             
         </th>
         <td>
-          <% if @translator.blocked? %>
-            <%=link_to_function("Unblock", "performTranslatorAction('unblock')") %>
-          <% else %>
-            <%=link_to_function("Block", "performTranslatorAction('block')") %>
-          <% end %>  
-
           | <%=link_to("Delete", {:action => :delete, :translator_id => @translator.id}, :confirm => "Are you sure you want to do that?")%>
 					
           | <%=link_to("View Translations", "/tr8n/admin/translation?wf_c0=translator_id&wf_o0=is&wf_v0_0=#{@translator.id}") %>

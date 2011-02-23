@@ -9,9 +9,6 @@
     <th>
       Manages Languages
     </th>  
-    <th>
-      Blocked
-    </th>  
     <th style="text-align:right">
       Translations Count
     </th>
@@ -30,9 +27,6 @@
       </td>  
       <td>
         <%=translator.manager?%>
-      </td>  
-      <td>
-        <%=translator.blocked?%>
       </td>  
       <td style="text-align:right">
         <%= link_to(translator.total_metric.total_translations || 0, "/tr8n/admin/translation?wf_c0=translator_id&wf_o0=is&wf_v0_0=#{translator.id}") %>

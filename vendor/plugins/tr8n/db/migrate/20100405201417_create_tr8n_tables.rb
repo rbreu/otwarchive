@@ -101,7 +101,6 @@ class CreateTr8nTables < ActiveRecord::Migration
     create_table :tr8n_translators do |t|
       t.integer :user_id,     :null => false
       t.boolean :inline_mode, :default => false
-      t.boolean :blocked,     :default => false
       t.integer :fallback_language_id
       t.timestamps
     end

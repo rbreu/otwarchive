@@ -155,10 +155,6 @@ private
 
   # make sure that the current user is a translator
   def validate_current_translator
-    if tr8n_current_user_is_translator? and tr8n_current_translator.blocked?
-      trfe("Your translation privileges have been revoked. Please contact the site administrator for more details.")
-      return redirect_to(Tr8n::Config.default_url)
-    end
   end
 
   # make sure that the current user is a language manager

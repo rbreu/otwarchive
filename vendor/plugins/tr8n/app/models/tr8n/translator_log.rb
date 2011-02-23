@@ -32,7 +32,7 @@ class Tr8n::TranslatorLog < ActiveRecord::Base
   ADMIN_LEVEL = 20
   ABUSE_LEVEL = 100
   
-  ACTIONS = [:got_blocked, :got_unblocked, :got_promoted, :got_demoted, 
+  ACTIONS = [:got_promoted, :got_demoted, 
   :enabled_inline_translations, :disabled_inline_translations, :switched_language, 
   :deleted_language_rule, :added_language_rule, :updated_language_rule, 
   :deleted_language_case, :added_language_case, :updated_language_case, 
@@ -82,7 +82,7 @@ class Tr8n::TranslatorLog < ActiveRecord::Base
   def describe
     html = action.to_s.gsub("_", " ")
     act = action.to_sym
-    if [:got_blocked, :got_unblocked, :got_promoted, :got_demoted].include?(act)
+    if [:got_promoted, :got_demoted].include?(act)
       html << " by " << user.name if user
       html << " (" << reason << ")" unless reason.blank?
     elsif [:got_new_level].include?(act)

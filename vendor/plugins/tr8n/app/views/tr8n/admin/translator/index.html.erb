@@ -25,17 +25,6 @@
         translator.title
       end     
     }, 'text-align:right'],
-    [:blocked, lambda{|translator|
-      html = []
-      if translator.blocked?
-        html << "<span style='color:red'>"
-      else
-        html << "<span style='color:green'>"
-      end     
-      html << translator.blocked?
-      html << "</span>"
-      html.join("")
-    }, 'text-align:right'],
     [:translation_count, lambda{|translator|
       link_to(translator.total_metric.total_translations || 0, "/tr8n/admin/translation?wf_c0=translator_id&wf_o0=is&wf_v0_0=#{translator.id}")
     }, 'text-align:right'],

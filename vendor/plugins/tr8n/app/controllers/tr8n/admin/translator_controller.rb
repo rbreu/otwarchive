@@ -43,18 +43,6 @@ class Tr8n::Admin::TranslatorController < Tr8n::Admin::BaseController
     redirect_to_source
   end
 
-  def block
-    @translator = Tr8n::Translator.find(params[:translator_id])
-    @translator.block!(tr8n_current_user, params[:reason])
-    redirect_to_source
-  end
-
-  def unblock
-    @translator = Tr8n::Translator.find(params[:translator_id])    
-    @translator.unblock!(tr8n_current_user, params[:reason])
-    redirect_to_source
-  end
-
   def update_level
     @translator = Tr8n::Translator.find(params[:translator_id])
     @translator.update_level!(tr8n_current_user, params[:new_level], params[:reason])

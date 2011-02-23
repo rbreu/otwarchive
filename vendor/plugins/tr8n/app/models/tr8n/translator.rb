@@ -61,17 +61,7 @@ class Tr8n::Translator < ActiveRecord::Base
     end
     translator
   end
-  
-  def block!(actor, reason = "No reason given")
-    update_attributes(:blocked => true, :inline_mode => false)
-    Tr8n::TranslatorLog.log_admin(self, :got_blocked, actor, reason)
-  end
-  
-  def unblock!(actor, reason = "No reason given")
-    update_attributes(:blocked => false)
-    Tr8n::TranslatorLog.log_admin(self, :got_unblocked, actor, reason)
-  end
-  
+
   def update_level!(actor, new_level, reason = "No reason given")
     update_attributes(:level => new_level)
     Tr8n::TranslatorLog.log_admin(self, :got_new_level, actor, reason, new_level.to_s)
