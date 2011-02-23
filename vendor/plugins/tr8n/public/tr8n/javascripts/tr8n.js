@@ -822,23 +822,6 @@ Tr8n.Utils = {
     txtarea.scrollTop = scrollPos;
   },
 
-  toggleKeyboards: function() {
-    if(!VKI_attach) return;
-    if (!this.keyboardMode) {
-      this.keyboardMode = true;
-
-      var elements = document.getElementsByTagName("input");
-      for(i=0; i<elements.length; i++) {
-        if (elements[i].type == "text") VKI_attach(elements[i]);
-      }
-      elements = document.getElementsByTagName("textarea");
-      for(i=0; i<elements.length; i++) {
-        VKI_attach(elements[i]);
-      }
-    } else {
-      window.location.reload();
-    }
-  },
 
 
 }

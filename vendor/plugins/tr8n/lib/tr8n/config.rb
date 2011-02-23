@@ -170,18 +170,6 @@ class Tr8n::Config
     not enabled?
   end
 
-  def self.enable_software_keyboard?
-    config[:enable_software_keyboard]
-  end
-
-  def self.enable_keyboard_shortcuts?
-    config[:enable_keyboard_shortcuts]
-  end
-
-  def self.default_shortcuts
-    @default_shortcuts ||= load_yml("/config/tr8n/site/shortcuts.yml", nil)
-  end
-
   def self.enable_inline_translations?
     config[:enable_inline_translations]
   end

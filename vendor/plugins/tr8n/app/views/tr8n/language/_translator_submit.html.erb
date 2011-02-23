@@ -89,12 +89,6 @@
     </button>
 </div>
 
-<% if Tr8n::Config.enable_software_keyboard? %> 
-  <script>
-    VKI_attach(document.getElementById('tr8n_translator_translation_label'));
-  </script>
-<% end %>
-
 <script>
   Tr8n.element("tr8n_translator_translation_label").focus();
 </script>
