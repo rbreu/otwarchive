@@ -3,71 +3,35 @@
 	<%= render :partial => "/tr8n/common/header" %>
 	
 	<div class="section_title">		
+	<%=tr8n_user_mugshot_tag(tr8n_current_translator, :linked => true)%>
 	  <%=tra("{user}'s Dashboard", "Dashboard section title", :user => current_user.default_pseud.name) %>
 	</div>
 	
-	<div class="section_box" style="background-color:#FDFFF0;">
-	    <table style="width:100%">
-	      <tr>
-	        <td style="width:50%; padding-top:3px;">
-					  <table>
-					    <tr>
-					      <td style="vertical-align:top;padding-right:2px; width:60px;">
-					        <%=tr8n_user_mugshot_tag(tr8n_current_translator, :linked => true)%>
-					      </td>
-					      <td style="vertical-align:top">
-									<table>
-	                  <tr>
-	                    <td style="vertical-align:top;"><%=tra("Your Languages:", "Dashboard section header") %></td>
-	                    <td style="vertical-align:top;">
-			                  <% langs = [] %>
-			                  <% tr8n_current_translator.languages.each do |lang|
-			                      next if lang.default?
-			                      langs << link_to(lang.english_name, :anchor => lang.locale)  
-			                     end %>       
-			                  <%= langs.join(" | ").html_safe %>
-	                    </td>
-	                  </tr>
-									</table>
-					      </td>
-					    </tr>
-					  </table>
-						
-	        </td>       
-	      	
-	      </tr>
-	    </table>  
-	</div>
+
+
+	Languages you have translated for:
 	
 	<% tr8n_current_translator.languages.each do |lang| %>
 		<% next if lang.default? %>
-		
+
 		<div class="section_title">
 		  <div style="float:right; font-size:12px; font-weight:normal; padding-top:5px;">
 	      <%=link_to(tra("select", "Language action link"), :locale => lang.locale)%>
-	      | <%=link_to(tra("site map", "Language action link"), "/tr8n/phrases/map?locale=#{lang.locale}")%>
 	      | <%=link_to(tra("phrases", "Language action link"), "/tr8n/phrases?locale=#{lang.locale}")%>
 	      | <%=link_to(tra("translations", "Language action link"), "/tr8n/translations?locale=#{lang.locale}")%>
-	      <% if tr8n_current_translator.manager? %>
-	         | <%=link_to(tra("manage", "Language action link"), "/tr8n/language/index?locale=#{lang.locale}")%>
-	      <% end %>
+	      | <%=link_to(tra("manage", "Language action link"), "/tr8n/language/index?locale=#{lang.locale}")%>
 	      | <%=link_to(tra("remove", "Language action link"), "/tr8n/language/remove?language_id=#{lang.id}")%>
 		  </div>
 	
-	    <%=tr8n_toggler_tag("lang_content_#{lang.id}")%>
-			
 	    <a name="<%=lang.locale%>" style="text-decoration:none;color:black;"><%=lang.english_name%></a>
 			
-			<% if tr8n_current_translator.manager? %> 
-			  <span style="color:#ccc; font-size:12px;">(<%=tra("You are managing this language") %>)</span>
-			<% end %>
-		</div>
+	</div>
 		
 		<div id="lang_content_<%=lang.id%>" class="section_box colored">
 			
-	    <%=render :partial=>"translations", :locals => {:lang => lang}%>
-	
-	    <%=render :partial=>"votes", :locals => {:lang => lang}%>
+	    
+	    <div style="color:red">Here be place for links to: list of translations the user made, where they commented on, voted on. Also a few statistics about this language (how many phrases are translated/untranslated)?</div>
+
 		</div>
 	<% end %>
 <% end %>
