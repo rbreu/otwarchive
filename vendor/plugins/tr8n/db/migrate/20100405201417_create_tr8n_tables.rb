@@ -90,19 +90,6 @@ class CreateTr8nTables < ActiveRecord::Migration
     add_index :tr8n_translators, [:user_id]
     add_index :tr8n_translators, [:created_at]
 
-    create_table :tr8n_translator_logs do |t|
-      t.integer :translator_id
-      t.integer :user_id,       :limit => 8
-      t.string  :action
-      t.integer :action_level
-      t.string  :reason
-      t.string  :reference
-      t.timestamps
-    end
-    add_index :tr8n_translator_logs, [:translator_id]
-    add_index :tr8n_translator_logs, [:user_id]
-    add_index :tr8n_translator_logs, [:created_at]
-    
     create_table :tr8n_translation_keys do |t|
       t.string  :key,   :null => false
       t.text    :label, :null => false
@@ -165,7 +152,6 @@ class CreateTr8nTables < ActiveRecord::Migration
     drop_table :tr8n_language_cases
     drop_table :tr8n_language_case_value_maps
     drop_table :tr8n_translators
-    drop_table :tr8n_translator_logs
     drop_table :tr8n_translation_keys
     drop_table :tr8n_translation_sources
     drop_table :tr8n_translation_key_sources

@@ -131,28 +131,6 @@ defaults: &defaults
       1..10:                  color:green;
       11..1000:               color:green;font-weight:bold;
   
-  #############################################################################
-  # Translator Roles         - manager level is set at 1000 and anything above
-  # 
-  # You can restrict translations by surroudning translation keys with the 
-  # following block:
-  #
-  # Tr8n::Config.with_options(:level => 150) do  
-  #   tr("Some Key")
-  # end
-  #
-  # Alternatively, you could provide this information in the key options:
-  # 
-  # tr("Label", "Description", {}, {:level => 150}) 
-  #
-  # This means that only translators with the level 150 and above can 
-  # translate this key.
-  #############################################################################
-  translator_level:  
-    0:                        regular
-    50:                       trusted
-    100:                      professional
-    1000:                     manager
  
   #############################################################################
   # Localization Settings

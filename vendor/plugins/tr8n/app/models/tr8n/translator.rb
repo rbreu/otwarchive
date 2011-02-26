@@ -60,10 +60,6 @@ class Tr8n::Translator < ActiveRecord::Base
     translator
   end
 
-  def update_level!(actor, new_level, reason = "No reason given")
-    update_attributes(:level => new_level)
-  end
-  
   def enable_inline_translations!
     update_attributes(:inline_mode => true)
   end
@@ -124,7 +120,6 @@ class Tr8n::Translator < ActiveRecord::Base
   def manager?
     return true unless Tr8n::Config.site_user_info_enabled?
     return true if Tr8n::Config.admin_user?(user)
-    return true if level >= Tr8n::Config.manager_level
     false
   end
 
@@ -181,24 +176,9 @@ class Tr8n::Translator < ActiveRecord::Base
     Tr8n::Config.guest_user?(user)
   end  
 
-  def level
-    return 0 if super.nil?
-    super
-  end
-
   def title
     return 'admin' if admin?
-    Tr8n::Config.translator_levels[level.to_s] || 'unknown'
-  end
-
-  def self.level_options
-    @level_options ||= begin
-      opts = []
-      Tr8n::Config.translator_levels.keys.collect{|key| key.to_i}.sort.each do |key|
-        opts << [Tr8n::Config.translator_levels[key.to_s], key.to_s]
-      end
-      opts
-    end
+    return 'translator'
   end
 
   def after_save

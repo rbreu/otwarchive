@@ -52,7 +52,6 @@ class Tr8n::TranslationKey < ActiveRecord::Base
                           :label => label, 
                           :description => desc, 
                           :locale => (options[:locale] || Tr8n::Config.block_options[:default_locale] || Tr8n::Config.default_locale),
-                          :level => (options[:level] || Tr8n::Config.block_options[:level] || 0),
                           :admin => Tr8n::Config.block_options[:admin])
         unless options[:source].blank?
           # at the time of creation - mark the first source of the key
@@ -411,7 +410,6 @@ class Tr8n::TranslationKey < ActiveRecord::Base
     
     return hlabel if Tr8n::Config.current_user_is_guest?
     return hlabel unless Tr8n::Config.current_user_is_translator?
-    return hlabel unless translator_permitted_to_translate?
     return hlabel if locked?(language)
 
     classes = ['tr8n_translatable']
@@ -428,15 +426,6 @@ class Tr8n::TranslationKey < ActiveRecord::Base
     html.html_safe   
   end
   
-  def level
-    return 0 if super.nil?
-    super
-  end
-  
-  def translator_permitted_to_translate?(translator = Tr8n::Config.current_translator)
-    translator.level >= level
-  end
-  
   def decorate_translation(language, translated_label, translated = true, options = {})
     
     hlabel = ERB::Util.html_escape(translated_label)
@@ -445,7 +434,6 @@ class Tr8n::TranslationKey < ActiveRecord::Base
     return hlabel if Tr8n::Config.current_user_is_guest?
     return hlabel unless Tr8n::Config.current_user_is_translator?
     return hlabel unless Tr8n::Config.current_translator.enable_inline_translations?
-    return hlabel unless translator_permitted_to_translate?
     return hlabel if locked?(language)
     return hlabel if self.language == language
 
@@ -515,7 +503,7 @@ class Tr8n::TranslationKey < ActiveRecord::Base
   end
   
   def self.search_conditions_for(params)
-    conditions = ["tr8n_translation_keys.locale <> ? and (level is null or level <= ?)", Tr8n::Config.current_language.locale, Tr8n::Config.current_translator.level]
+    conditions = ["tr8n_translation_keys.locale <> ?", Tr8n::Config.current_language.locale]
     
     if Tr8n::Config.enable_caching?
       conditions[0] << " and verified_at is not null"
