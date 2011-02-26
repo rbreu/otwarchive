@@ -213,46 +213,6 @@ class Tr8n::Language < ActiveRecord::Base
     dependencies.include?("gender")
   end
 
-  def prohibited_words
-    return [] if curse_words.blank?
-    @prohibited_words ||= begin
-      wrds = self.curse_words.split(",").collect{|w| w.strip.downcase} 
-      wrds << fallback_language.prohibited_words if fallback_language
-      wrds.flatten.uniq
-    end
-  end
-
-  # you can add -bad_words to override the fallback language rules
-  def accepted_prohibited_words
-    return [] if curse_words.blank?
-    @accepted_prohibited_words ||= begin
-      wrds = self.curse_words.split(",").select{|w| w.first=='-'}
-      wrds << wrds.collect{|w| w.strip.gsub('-', '').downcase}
-      wrds << fallback_language.accepted_prohibited_words if fallback_language
-      wrds.flatten.uniq
-    end
-  end
-  
-  def bad_words
-    @bad_words ||= begin
-      bw = prohibited_words + Tr8n::Config.default_language.prohibited_words
-      bw.flatten.uniq - accepted_prohibited_words
-    end
-  end
-  
-  def clean_sentence?(sentence)
-    return true if sentence.blank?
-
-    # we need to solve the downcase problem - it doesn't work for russian and others
-    sentence = sentence.downcase
-
-    bad_words.each do |w|
-      return false unless sentence.scan(/#{w}/).empty?
-    end
-    
-    true
-  end
-
   def after_save
     Tr8n::Cache.delete("language_#{locale}")
     Tr8n::Cache.delete("enabled_languages")

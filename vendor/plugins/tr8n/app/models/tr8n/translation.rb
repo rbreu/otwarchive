@@ -164,10 +164,6 @@ class Tr8n::Translation < ActiveRecord::Base
     self.class.find(:all, :conditions => conditions).empty?
   end
   
-  def clean?
-    language.clean_sentence?(label)
-  end
-  
   def can_be_edited_by?(editor)
     return false if translation_key.locked?
     translator == editor

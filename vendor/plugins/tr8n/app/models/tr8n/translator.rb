@@ -95,9 +95,6 @@ class Tr8n::Translator < ActiveRecord::Base
   def updated_language_case!(lcase)
   end
 
-  def used_abusive_language!(language = Tr8n::Config.current_language)
-  end
-
   def added_translation!(translation)
   end
 

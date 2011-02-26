@@ -67,12 +67,6 @@ class Tr8n::TranslationsController < Tr8n::BaseController
       return redirect_to(@source_url)
     end
     
-    unless @translation.clean?
-      tr8n_current_translator.used_abusive_language!
-      trfe("Your translation contains prohibited words and will not be accepted")
-      return redirect_to(@source_url)
-    end
-
     @translation.save_with_log!(tr8n_current_translator)
     @translation.reset_votes!(tr8n_current_translator)
 
@@ -145,10 +139,6 @@ class Tr8n::TranslationsController < Tr8n::BaseController
           elsif not @translation.uniq?
             tr8n_current_translator.tried_to_perform_unauthorized_action!("tried to submit an identical translation")
             @translation.label = "There already exists such translation for this phrase. Please vote on it instead or suggest an elternative translation."
-            mode = :edit
-          elsif not @translation.clean?
-            tr8n_current_translator.used_abusive_language!
-            @translation.label = "Your translation contains prohibited words and will not be accepted. Click on cancel and try again."
             mode = :edit
           else
             @translation.save_with_log!(tr8n_current_translator)

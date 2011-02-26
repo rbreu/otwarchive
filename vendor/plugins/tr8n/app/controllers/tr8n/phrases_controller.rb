@@ -136,12 +136,6 @@ class Tr8n::PhrasesController < Tr8n::BaseController
       return redirect_to(@source_url)
     end  
     
-    unless @translation.clean?
-      tr8n_current_translator.used_abusive_language!
-      trfe("Your translation contains prohibited words and will not be accepted")
-      return redirect_to(@source_url)
-    end
-
     @translation.save_with_log!(tr8n_current_translator)
     @translation.reset_votes!(tr8n_current_translator)
 
@@ -178,14 +172,8 @@ class Tr8n::PhrasesController < Tr8n::BaseController
           @translation.label = "You are not authorized to edit this translation as you were not it's creator"
           mode = :edit
         else  
-          if @translation.clean?
-            @translation.save_with_log!(tr8n_current_translator)
-            @translation.reset_votes!(tr8n_current_translator)
-          else
-            tr8n_current_translator.used_abusive_language!
-            @translation.label = "Your translation contains prohibited words and will not be accepted. Click on cancel and try again."
-            mode = :edit
-          end
+          @translation.save_with_log!(tr8n_current_translator)
+          @translation.reset_votes!(tr8n_current_translator)
         end
 
       end
