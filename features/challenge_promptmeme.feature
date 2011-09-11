@@ -33,6 +33,26 @@ Feature: Prompt Meme Challenge
   When I view open challenges
   Then I should see "Battle 12"
   
+  Scenario: Past challenge is not in list of open challenges
+  
+  Given I am logged in as "mod1"
+    And I have standard challenge tags setup
+  When I set up Battle 12 promptmeme collection
+    And I fill in past challenge options
+    And I am logged in as "myname1"
+  When I view open challenges
+  Then I should not see "Battle 12"
+  
+  Scenario: Future challenge is not in list of open challenges
+  
+  Given I am logged in as "mod1"
+    And I have standard challenge tags setup
+  When I set up Battle 12 promptmeme collection
+    And I fill in future challenge options
+    And I am logged in as "myname1"
+  When I view open challenges
+  Then I should not see "Battle 12"
+  
   Scenario: Can edit settings for a prompt meme
   
   Given I have Battle 12 prompt meme fully set up
@@ -277,6 +297,15 @@ Feature: Prompt Meme Challenge
   When I follow "My Signups"
   Then I should not see "Remove prompt"
   
+  Scenario: Mod can't edit signups
+  
+  Given I have Battle 12 prompt meme fully set up
+  When I am logged in as "myname1"
+  When I sign up for Battle 12 with combination A
+  When I am logged in as "mod1"
+  When I edit the signup by "myname1"
+  Then I should see "You can't edit someone else's signup"
+  
   Scenario: Mod deletes a signup that doesn't fit the challenge rules
   
   Given I have Battle 12 prompt meme fully set up
@@ -299,16 +328,15 @@ Feature: Prompt Meme Challenge
     And I should not see "Signups for Battle 12"
   #  And "myname1" should be emailed
   
-  Scenario: Mod edits a prompt that doesn't fit the challenge rules
+  Scenario: Mod cannot edit someone else's prompt
   
   Given I have Battle 12 prompt meme fully set up
   When I am logged in as "myname1"
   When I sign up for Battle 12 with combination C
   When I am logged in as "mod1"
   When I edit the prompt by "myname1"
-  Then I should see "Submit a Prompt For Battle 12"
-    And I should not see "You can't edit someone else's signup!"
-    And the "Stargate Atlantis" checkbox should be checked
+  Then I should not see "Submit a Prompt for Battle 12"
+    And I should see "You can't edit someone else's signup!"
 
   Scenario: User deletes one prompt
   
@@ -793,6 +821,16 @@ Feature: Prompt Meme Challenge
   When I delete the signup by "myname1"
   Then I should see "Challenge signup was deleted."
   
+  Scenario: As a co-moderator I can delete prompts
+
+  Given I have Battle 12 prompt meme fully set up
+  Given I have added a co-moderator "mod2" to collection "Battle 12"
+  When I am logged in as "myname1"
+  When I sign up for Battle 12 with combination A
+  When I am logged in as "mod2"
+  When I delete the prompt by "myname1"
+  Then I should see "Prompt was deleted."
+  
   Scenario: When maintainer deletes signup, its prompts disappear from the collection
 
   Given I have Battle 12 prompt meme fully set up
@@ -1239,3 +1277,23 @@ Feature: Prompt Meme Challenge
   Then I should see "myname1" within "#fulfilled_claims"
     And I should see "Response posted on"
     And I should see "Not yet approved"
+
+
+  Scenario: Download prompt CSV from signups page
+  Given I am logged in as "mod1"
+  And I have standard challenge tags setup
+  And I create Battle 12 promptmeme
+
+  When I go to the "Battle 12" signups page
+  And I follow "Download (CSV)"
+  Then I should get a file with ending and type csv
+
+  Scenario: Download prompt CSV from requests page
+  Given I am logged in as "mod1"
+  And I have standard challenge tags setup
+  And I create Battle 12 promptmeme
+
+  When I go to the "Battle 12" requests page
+  And I follow "Download (CSV)"
+  Then I should get a file with ending and type csv
+
