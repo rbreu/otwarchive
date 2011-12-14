@@ -24,6 +24,11 @@ Factory.define :archive_faq do |f|
   f.sequence(:content) { |n| "This is the #{n} FAQ" }
 end
 
+Factory.define :admin_post do |f|  
+  f.sequence(:title) { |n| "The #{n} Admin Post Title" }
+  f.sequence(:content) { |n| "This is the #{n} admin post content." }
+end
+
 Factory.define :tag do |f|
   f.canonical true
   f.sequence(:name) { |n| "The #{n} Tag" }
