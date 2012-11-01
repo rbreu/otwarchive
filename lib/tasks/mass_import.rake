@@ -245,7 +245,7 @@ namespace :massimport do
   
   desc "Clear collection TESTING ONLY"
   task(:clear_collection_testing_only => :environment) do
-    collection_name = ask("Collection name? (ALL WORKS IN THIS COLLECTION WILL BE DELETED!!!!)")
+    collection_name = ask("Collection name? (ALL WORKS/BOOKMARKS IN THIS COLLECTION WILL BE DELETED!!!!)")
     c = Collection.find_by_name(collection_name)
     unless c
       puts "No collection #{collection_name} found!"
@@ -257,13 +257,18 @@ namespace :massimport do
 
     # remove the works
     Work.where(:id => work_ids).destroy_all
-    
+
     # get rid of external authors
     external_authors.select {|ea| ea.works.count == 0}.each do |ea| 
       puts "Destroying external #{ea.email}"
       ea.destroy
     end
     
+    # TODO: inefficient for big amount of bookmarks...
+    for bookmark in c.bookmarks do
+      bookmark.bookmarkable.destroy
+      bookmark.destroy
+    end
   end
 
   desc "Create archivist and collection if they don't already exist"
@@ -274,11 +279,16 @@ namespace :massimport do
     if u.new_record?
       archivist_password = ask("Archivist temp password?")
       archivist_email = ask("Archivist email?")
-      u.password = archivist_password; u.email = archivist_email; u.save
+      u.password = archivist_password
+      u.email = archivist_email
+      u.age_over_13 = "1"
+      u.terms_of_service = "1"
+      user.activated_at = Date.current
+      u.save!
     end
     unless u.is_archivist?
       u.roles << Role.find_by_name("archivist")
-      u.save
+      u.save!
     end
     # make the collection if it doesn't exist already
     @collection_name ||= ask("Collection name?")
@@ -291,10 +301,10 @@ namespace :massimport do
     unless c.owners.include?(u.default_pseud)
       p = c.collection_participants.where(:pseud_id => u.default_pseud.id).first || c.collection_participants.build(:pseud => u.default_pseud) 
       p.participant_role = "Owner"
-      c.save
-      p.save
+      c.save!
+      p.save!
     end
-    c.save
+    c.save!
     puts "Archivist #{u.login} set up and owns collection #{c.name}."
   end
   
@@ -637,6 +647,135 @@ namespace :massimport do
   end
 
 
+  desc "Import the GSSU archive"
+  task(:gssu => :environment) do
+    puts 'Importing GSSU archive...'
+    base_dir = '/home/rbreu/otw/gssu/gssu_sorted/'
+    base_url = 'http://skybs.slashcity.net/gssu/'
+    author_email = 'rebecca@rbreu.de' # for testing purposes
+    # author_email = nil # for real import
+
+    @archivist_login = 'gssu_archivist'
+    @collection_name = 'gssu'
+    Rake::Task['massimport:create_archivist_and_collection'].invoke
+    collection = Collection.find_by_name(@collection_name)
+    archivist = User.find_by_login(@archivist_login)
+    archivist_pseud = archivist.default_pseud
+
+    data = File.read(base_dir + 'maindata.json', :encoding => 'utf-8')
+    data = JSON.parse(data)
+
+    for path, story in data['stories'] do
+      storyfile = base_dir + path
+      url = base_url + path
+
+      # check to see if it's already imported
+      work = Work.find_by_imported_from_url(url)
+      if work and work.posted?
+        work.collections << collection unless work.collections.include?(collection)
+        work.save!
+        puts "Added existing work #{work.title} to #{collection.title}"
+        next # don't recreate the work
+      end
+
+      work = Work.new(:title => sanitize_value('title', story['title']),
+                      :fandom_string => sanitize_value('fandom_string', story['fandom']),
+                      :rating_string => story['rating'],
+                      :language => Language.find_by_short(story['language']),
+                      :summary => sanitize_value('summary', story['summary']),
+                      :imported_from_url => url,
+                      :posted => true,
+                      :warning_strings => ArchiveConfig.WARNING_DEFAULT_TAG_NAME,
+                      )
+
+      # TODO
+      # special characters in freeforms:
+      #   -> Sk Koelsch "Verliebt, verlobt und noch immer nicht geschieden"
+      
+      if story['freeforms'] && !story['freeforms'].empty?
+        work.freeform_string = sanitize_value('freeform_string', story['freeforms'].join(', '))
+      end
+      if story['pairing'] && !story['pairing'].empty?
+        work.relationship_string = sanitize_value('relationship_string', story['pairing'])
+      end
+      if story['category'] && !story['category'].empty?
+        work.category_string = story['category']
+      end
+
+      work.pseuds << archivist_pseud
+      work.collections << collection
+
+      if story['chapters']
+        story['chapters'].each_with_index do |storychapter, i|
+          storyfile = base_dir + storychapter['path']
+          content = File.read(storyfile, :encoding => 'utf-8')
+          chapter = Chapter.new(:content => sanitize_value('content', content),
+                                :published_at => Date.parse(storychapter['date']),
+                                :title => sanitize_value('title', storychapter['title']),
+                                :summary => sanitize_value('summary', storychapter['summary']),
+                                :position => i + 1,
+                                :posted => true)
+          chapter.pseuds << archivist_pseud
+          work.chapters << chapter
+          work.set_revised_at(chapter.published_at)
+          chapter.save!
+        end
+      elsif
+        content = File.read(storyfile, :encoding => 'utf-8')
+        chapter = Chapter.new(:content => sanitize_value('content', content),
+                              :published_at => Date.parse(story['date']),
+                              :posted => true,
+                              :position => 1,
+                              )
+        chapter.pseuds << archivist_pseud
+        work.chapters << chapter
+        work.set_revised_at(chapter.published_at)
+        chapter.save!
+      end
+      
+      story['authors'].each do |author|
+        name = data['authors'][author]['name']
+        email = data['authors'][author]['emails'][0] || 'dummy@example.com'
+        external_author = ExternalAuthor.find_or_create_by_email(email)
+        external_author_name = ExternalAuthorName.find(:first,
+                                                       :conditions => {:name => name, :external_author_id => external_author.id})
+        external_author_name ||= ExternalAuthorName.new(:name => name)
+        external_author.external_author_names << external_author_name
+        external_author.save!
+        work.external_creatorships.build(:external_author_name => external_author_name,
+                                         :archivist => archivist)
+      end
+
+      work.expected_number_of_chapters = work.chapters.length
+      work.save!
+      work.set_word_count
+      work.save!
+    end
+
+
+    for url, bookmark in data['bookmarks'] do
+      author = data['authors'][bookmark['authors'][0]]
+      work = ExternalWork.new(:title => sanitize_value('title', bookmark['title']),
+                              :fandom_string => sanitize_value('fandom_string', bookmark['fandom']),
+                              :rating_string => bookmark['rating'],
+                              :language => Language.find_by_short(bookmark['language']),
+                              :summary => sanitize_value('summary', bookmark['summary']),
+                              :warning_strings => ArchiveConfig.WARNING_DEFAULT_TAG_NAME,
+                              :url => url,
+                              :author => author['name'])
+      
+      unless work.save
+        puts "Problem bookmarking #{url}:"
+        puts work.errors
+        next
+      end
+
+      bookmark = Bookmark.new(:pseud => archivist_pseud,
+                              :bookmarkable => work)
+      bookmark.collections << collection
+      bookmark.save!
+    end
+  end
 
 end
 
